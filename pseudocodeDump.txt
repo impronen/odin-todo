@@ -1,0 +1,27 @@
+Modules or controllers needed:
+
+1) Task storage
+2) Task controller / creator 
+2.5) Task creator in DOM (visual representation to feed information to task controller)
+3) Project controller (as these will be relatively simple, there is no need for seperate storage)
+3.5) Project creator in DOM
+4) Layout creator (to create overall layout)
+5) Task UI controller (renders the tasks as cards on the screen - contains methods for filtering view)
+
+1) TASK STORAGE
+
+
+2) TASK CONTROLLER / CREATOR 
+
+Creates an task object.
+Object needs to contain datapoints for: 
+    -name
+    -Project
+    -priority (low / medium / high)
+    -due date
+    -completion status
+    -additional info on task 
+
+Object needs to contain methods for manipulating these data points (see here if 
+inheritance can be used to benefit) such as marking completed, editing descripition, changing
+from project to another, etc. So that task ui controller can tap to them but they remain selfcontained.

@@ -1,4 +1,4 @@
-## Todo List or TaskLister
+# Todo List or TaskLister
 
 # What is this project about?
 
