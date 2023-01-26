@@ -3,15 +3,15 @@ import date from 'date-and-time';
 import { newTask } from './components/taskController.js';
 import { taskArray, taskReader } from './data/taskStorage.js'
 import { overLayRendered, formCreator } from './components/taskInputCreator'
+import { looper } from './functions/storageLoopers'
 
 
-const testi = newTask("testi", "projekti", "tärkeä", "pvm", "infoa");
-console.log(testi)
-testi.compStatus(true)
-console.log(testi.getCompStatus())
-console.log(testi)
+const testi = new newTask("Test Task", "Project", "Important", "2023-01-27", "Do it ya git");
+
+
 
 taskArray.push(testi)
+taskReader()
 
 
 let content = document.querySelector(".content")
@@ -38,13 +38,22 @@ function button3 () {
     content.appendChild(button)
 }
 
+function button4 () {
+    let button = document.createElement('button');
+    button.innerHTML = "Change complete"
+    button.setAttribute('id', 'btn4') 
+    content.appendChild(button)
+}
+
 button2();
 button();
 button3();
+button4();
 
 let buttonListener = document.querySelector('#btn')
 let buttonListener2 = document.querySelector('#btn2')
 let buttonListener3 = document.querySelector('#btn3')
+let buttonListener4 = document.querySelector('#btn4')
 
 
 buttonListener.addEventListener('click', function(){
@@ -56,9 +65,11 @@ buttonListener.addEventListener('click', function(){
     let info = form.querySelector('input[name="info"]').value
     console.log(name, project, priority, date, info)
     
-    const testi2 = newTask(name, project, priority, date, info)
+    const testi2 = new newTask(name, project, priority, new Date(`${date}T00:00`), info)
     taskArray.push(testi2)
+    testi2.isTheDate()
 })
 
 buttonListener2.addEventListener('click', overLayRendered)
-buttonListener3.addEventListener('click', taskReader)
+buttonListener3.addEventListener('click', looper(taskArray))
+/* buttonListener4.addEventListener('click', testi.changeCompletion("X")) */
