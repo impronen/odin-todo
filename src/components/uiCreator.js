@@ -3,7 +3,7 @@ let content = document.querySelector(".content")
 function createUI() {
     createHeader()
     createMain()
-    createSidebar ()
+    createSidebar()
     createTaskDisplay()
 }
 
@@ -78,21 +78,55 @@ function createTaskDisplay() {
     main.appendChild(taskDisplay)
 }
 
+function createTaskCard(task)  {
+    let taskDisplay = document.querySelector(".taskDisplay")
+
+    let taskCard = document.createElement('div')
+    taskCard.classList.add('taskCard')
+    taskDisplay.appendChild(taskCard)
+
+    let cardLeftSide = document.createElement('div')
+    cardLeftSide.classList.add('cardLeftSide')
+    taskCard.appendChild(cardLeftSide)
+
+    let taskName = document.createElement('div')
+    taskName.classList.add('taskName')
+    taskName.innerHTML = task.getName()
+    cardLeftSide.appendChild(taskName)
+
+    let projectName = document.createElement('div')
+    projectName.classList.add('projectName')
+    projectName.innerHTML = task.getProject()
+    cardLeftSide.appendChild(projectName)
+
+    let cardRightSide = document.createElement('div')
+    cardRightSide.classList.add('cardRightSide')
+    taskCard.appendChild(cardRightSide)
+
+    let rightTopSideCont = document.createElement('div')
+    rightTopSideCont.classList.add('rightTopSideCont')
+    cardRightSide.appendChild(rightTopSideCont)
+
+    let editButtonCont = document.createElement('div')
+    editButtonCont.classList.add('editButtonCont')
+    editButtonCont.innerHTML = "Buttons here"
+    rightTopSideCont.appendChild(editButtonCont)
+
+    let taskDoneCheckbox = document.createElement('div')
+    taskDoneCheckbox.classList.add('taskDoneCheckbox')
+    taskDoneCheckbox.innerHTML = `<input type="checkbox" id="taskdone" name="taskdone"><label for="taskdone">Done</label>`
+    rightTopSideCont.appendChild(taskDoneCheckbox)
+
+    let rightLowSideCont = document.createElement('div')
+    rightLowSideCont.classList.add('rightLowSideCont')
+    rightLowSideCont.innerHTML = `Due date: ${task.getDate()}`
+    cardRightSide.appendChild(rightLowSideCont)
 
 
-
-
-
-
-/* function button4 () {
-    let button = document.createElement('button');
-    button.innerHTML = "Change complete"
-    button.setAttribute('id', 'btn4') 
-    content.appendChild(button)
-    
-} */
+}
 
 
 export {
-    createUI
+    createUI,
+    createTaskCard
 }

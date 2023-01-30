@@ -41,6 +41,7 @@ function formCreator () {
     info.setAttribute("name", "info")
     info.setAttribute("rows", "5")
     info.setAttribute("cols", "30")
+    info.setAttribute("placeholder", "Notes")
     
     form.appendChild(taskName)
     form.appendChild(projectName)
@@ -51,6 +52,13 @@ function formCreator () {
     overlay.appendChild(form)
 }
 
+function overLayDestroyer() {
+    let overlay = document.querySelector('.inputOverlay')
+    overlay.remove()
+
+}
+
 export {
-    overLayRendered
+    overLayRendered,
+    overLayDestroyer
 }

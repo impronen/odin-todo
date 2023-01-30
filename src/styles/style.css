@@ -38,3 +38,15 @@
     font-size: large;
     margin: 20px;
   }
+
+
+  .taskCard {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+  }
+
+  .rightTopSideCont {
+    display: flex;
+    flex-direction: row;
+  }
