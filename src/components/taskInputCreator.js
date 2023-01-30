@@ -1,7 +1,7 @@
 
 
 function overLayRendered () {
-    let content = document.querySelector(".content")
+    let content = document.querySelector(".taskDisplay")
     let inputOverlay = document.createElement('div')
     inputOverlay.setAttribute('id', 'inputOverlay')
     inputOverlay.className = "inputOverlay"

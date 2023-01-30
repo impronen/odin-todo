@@ -1,3 +1,11 @@
+NEXT: wrap project and task arrays into objects. Attach methods to manipulate these arrays to these
+objects, so they can be called as needed.
+
+Figure out a way to have a new task object to look for the existence of project with a similar name and join
+that task to the project. IF no project with name is in existense, create project, then attach this to the
+newly created project. 
+
+Initial notes:
 Modules or controllers needed:
 
 1) Task storage

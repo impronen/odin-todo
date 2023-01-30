@@ -1,19 +1,32 @@
+import { extend } from "date-and-time"
 
-class newTask {
-    constructor(name, project, priority, dueDate, info) {
-        this.name = name
+class newProject {
+    constructor(project) {
         this.project = project
+    }
+
+    getProject() {
+        return this.project
+    }
+    changeProject(x) { //this needs further work once project management is implemented
+        return this.project = x
+    }
+}
+
+
+class newTask extends newProject {
+    constructor(name, project, priority, dueDate, info) {
+        super(project)
+        this.name = name
         this.priority = priority
         this.dueDate = dueDate
         this.info = info
         this.isCompleted = false
+        this.uuid = crypto.randomUUID()
     }
     //Getters
     getName() {
         return this.name
-    }
-    getProject() {
-        return this.project
     }
     getDate() {
         return this.dueDate
@@ -24,13 +37,13 @@ class newTask {
     getCompletion() {
         return this.isCompleted;
     }
-
+    getUuid() {
+        return this.uuid
+    }
+    
     //Changers
     changeName(x) {
         return this.name = x
-    }
-    changeProject(x) {
-        return this.project = x
     }
     changePriority(x) {
         return this.priority = x
@@ -55,7 +68,12 @@ class newTask {
         let dueDate = this.dueDate
         let difference = dueDate.getTime() - today;
         let days = Math.ceil(difference / (1000 * 3600 * 24));
+        console.log(`Task is due in ${days} days.`)
         return days
+    }
+
+    projectConnector() {
+
     }
 }
 
