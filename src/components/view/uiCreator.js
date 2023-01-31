@@ -70,13 +70,14 @@ function createSidebar () {
     //Create List for projects that cycles the content from projects on storage array
  }
 
-
 function createTaskDisplay() {
     let main = document.querySelector(".main")
     let taskDisplay = document.createElement('div');
     taskDisplay.classList.add('taskDisplay')
     main.appendChild(taskDisplay)
 }
+
+
 
 function createTaskCard(task)  {
     let taskDisplay = document.querySelector(".taskDisplay")

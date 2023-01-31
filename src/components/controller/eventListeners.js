@@ -1,7 +1,7 @@
-import { newTask } from "../components/taskController"
-import { taskArray } from "../data/storage"
-import { overLayDestroyer } from "../components/taskInputCreator"
-import { looper } from "../functions/storageLoopers"
+import { newTask } from "../model/taskController"
+import { taskArray } from "../../data/storage"
+import { overLayDestroyer } from "../view/taskInputCreator"
+import { looper } from "../../functions/storageLoopers"
 
 
 function addToTaskListListener() {
