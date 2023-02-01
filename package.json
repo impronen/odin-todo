@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "date-and-time": "^2.4.2",
+    "material-symbols": "^0.4.3",
     "moment": "^2.29.4"
   }
 }
