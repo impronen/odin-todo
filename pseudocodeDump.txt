@@ -1,3 +1,16 @@
+Updates for 1/2/2023
+
+Decided to wrap storage and all DOM stuff to IIFE style. 
+This will allow a better seperation of concerns and mangeability. Less stuff to
+import / export and less changes needed when adding new features.
+
+ALL that relates or changes / generates the DOM will be in DOM.js
+The storage will have one iife function object, with all the methods needed to
+filter tasks/projects in a higher level than changing the properties directly
+
+
+//////////////////////////////////////////
+
 NEXT: wrap project and task arrays into objects. Attach methods to manipulate these arrays to these
 objects, so they can be called as needed.
 

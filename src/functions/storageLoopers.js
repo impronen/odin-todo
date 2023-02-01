@@ -1,4 +1,4 @@
-import { createTaskCard } from '../components/view/uiCreator'
+import { DOM } from "../components/view/DOM";
 
 function looper(storage) {
     storage.forEach(element => {
@@ -7,7 +7,7 @@ function looper(storage) {
 }
 
 function objectLooper(storageArray) {
-    storageArray.forEach(task => createTaskCard(task))
+    storageArray.forEach(task => DOM.createTaskCard(task))
 }
 
 export {

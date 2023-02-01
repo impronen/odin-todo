@@ -1,11 +1,10 @@
 import './styles/style.css';
 import date from 'date-and-time';
-import { newTask } from './components/model/taskController.js';
-import { taskArray } from './data/storage.js'
-import { overLayRendered, overLayDestroyer } from './components/view/taskInputCreator'
+import { newTask } from './components/controller/taskController.js';
+import { taskArray } from './components/model/storage.js'
+import { DOM } from './components/view/DOM';
 import { objectLooper } from './functions/storageLoopers'
-import { createUI, createTaskCard } from './components/view/uiCreator'
-import { addToTaskListListener, logArrayListener } from './components/controller/eventListeners'
+
 
 
 const testi = new newTask("Test Task", "Project", "Important", "2023-01-27", "Do it ya git");
@@ -14,14 +13,14 @@ taskArray['taskStorage'].push(testi)
 taskArray['taskStorage'].push(test2)
 
 
-createUI()
+DOM.createUI()
 
 let buttonListener = document.querySelector('#addTaskButton')
-buttonListener.addEventListener('click', overLayRendered)
+buttonListener.addEventListener('click', DOM.overLayRendered)
 
-objectLooper(taskArray['taskStorage'])
+/* objectLooper(taskArray['taskStorage']) */
 
-addToTaskListListener()
-logArrayListener()
+DOM.addToTaskListListener()
+DOM.logArrayListener()
 
-/* createTaskCard(testi)  */
+DOM.createTaskCard(testi)
