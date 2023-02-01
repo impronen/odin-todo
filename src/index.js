@@ -1,4 +1,5 @@
 import './styles/style.css';
+import './styles/cardstyles.css';
 import date from 'date-and-time';
 import { newTask } from './components/controller/taskController.js';
 import { taskArray } from './components/model/storage.js'

@@ -1,6 +1,7 @@
 import { newTask } from "../controller/taskController"
 import { taskArray } from "../model/storage"
 import { looper } from "../../functions/storageLoopers"
+import 'material-symbols';
 
 const DOM = (() => {
 
@@ -117,7 +118,7 @@ const DOM = (() => {
 
         let editButtonCont = document.createElement('div')
         editButtonCont.classList.add('editButtonCont')
-        editButtonCont.innerHTML = "Buttons here"
+        editButtonCont.innerHTML = `<span class="material-symbols-rounded">edit_note</span><span class="material-symbols-rounded">delete</span>`
         rightTopSideCont.appendChild(editButtonCont)
 
         let taskDoneCheckbox = document.createElement('div')
@@ -127,7 +128,7 @@ const DOM = (() => {
 
         let rightLowSideCont = document.createElement('div')
         rightLowSideCont.classList.add('rightLowSideCont')
-        rightLowSideCont.innerHTML = `Due date: ${task.getDate()}`
+        rightLowSideCont.innerHTML = `Due in ${task.getDate()}`
         cardRightSide.appendChild(rightLowSideCont)
 
 
