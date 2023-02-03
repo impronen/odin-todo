@@ -1,4 +1,4 @@
-import { extend } from "date-and-time"
+import date from 'date-and-time';
 
 class newProject {
     constructor(project) {
@@ -29,7 +29,8 @@ class newTask extends newProject {
         return this.name
     }
     getDate() {
-        return this.dueDate
+        let exportDate = date.format(this.dueDate, 'DD/MM')
+        return exportDate
     }
     getInfo() {
         return this.info

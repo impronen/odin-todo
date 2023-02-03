@@ -1,6 +1,5 @@
 import { newTask } from "../controller/taskController"
 import { taskArray } from "../model/storage"
-import { looper } from "../../functions/storageLoopers"
 import 'material-symbols';
 
 const DOM = (() => {
@@ -37,11 +36,8 @@ const DOM = (() => {
         buttonContainer.appendChild(addTaskButton)
 
         
-        let addToTaskList = document.createElement('button');
-        addToTaskList.innerHTML = "Add task to list"
-        addToTaskList.setAttribute('id', 'addToTaskList')
-        addToTaskList.classList.add('buttonstyle1') 
-        buttonContainer.appendChild(addToTaskList)
+        
+        
     }
 
     function createMain() {
@@ -131,7 +127,7 @@ const DOM = (() => {
 
         let rightLowSideCont = document.createElement('div')
         rightLowSideCont.classList.add('rightLowSideCont')
-        rightLowSideCont.innerHTML = `Due in ${task.getDate()}`
+        rightLowSideCont.innerHTML = `Due in ${task.isTheDate()} days`
         cardRightSide.appendChild(rightLowSideCont)
 
 
@@ -187,6 +183,15 @@ const DOM = (() => {
         form.appendChild(info)
     
         overlay.appendChild(form)
+
+        let addToTaskList = document.createElement('button');
+        addToTaskList.innerHTML = "Add task to list"
+        addToTaskList.setAttribute('id', 'addToTaskList')
+        addToTaskList.classList.add('buttonstyle1')
+
+        overlay.appendChild(addToTaskList)
+        addToTaskListListener()
+
     }
     
     function overLayDestroyer() {
