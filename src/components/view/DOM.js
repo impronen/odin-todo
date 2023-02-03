@@ -85,7 +85,10 @@ const DOM = (() => {
         main.appendChild(taskDisplay)
     }
 
-
+    function arrayPrinter(currentArray) { //Use as cleaner & rebuilder of cards visible to user
+        let oldCards = document.querySelectorAll(".taskCard").forEach(e => e.remove());
+        currentArray.forEach(task => DOM.createTaskCard(task))
+    } 
 
     function createTaskCard(task)  {
         let taskDisplay = document.querySelector(".taskDisplay")
@@ -208,6 +211,7 @@ const DOM = (() => {
             taskArray['taskStorage'].push(newTask1)
             newTask1.isTheDate()
             overLayDestroyer()
+            arrayPrinter(taskArray['taskStorage'])
         })
     }
     
@@ -215,7 +219,12 @@ const DOM = (() => {
         let logArrayBtn = document.querySelector('#logArrayBtn')
         logArrayBtn.addEventListener('click', function () {looper(taskArray['taskStorage'])})
     }
-    return { createUI, overLayRendered, createTaskCard, addToTaskListListener, logArrayListener }
+    return { createUI, 
+        overLayRendered, 
+        createTaskCard,
+        addToTaskListListener, 
+        logArrayListener,
+        arrayPrinter }
 })()
 
 

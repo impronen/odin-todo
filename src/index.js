@@ -19,9 +19,8 @@ DOM.createUI()
 let buttonListener = document.querySelector('#addTaskButton')
 buttonListener.addEventListener('click', DOM.overLayRendered)
 
-/* objectLooper(taskArray['taskStorage']) */
+DOM.arrayPrinter(taskArray['taskStorage'])
 
 DOM.addToTaskListListener()
 DOM.logArrayListener()
 
-DOM.createTaskCard(testi)
