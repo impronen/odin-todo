@@ -65,7 +65,7 @@ const DOM = (() => {
         sidebar.appendChild(dueTodayButton)
 
         let logArrayBtn = document.createElement('button');
-        logArrayBtn.innerHTML = "Log Array"
+        logArrayBtn.innerHTML = "Log late"
         logArrayBtn.setAttribute('id', 'logArrayBtn')
         logArrayBtn.classList.add('buttonstyle2') 
         sidebar.appendChild(logArrayBtn)
@@ -83,6 +83,7 @@ const DOM = (() => {
 
     function arrayPrinter(currentArray) { //Use as cleaner & rebuilder of cards visible to user
         let oldCards = document.querySelectorAll(".taskCard").forEach(e => e.remove());
+        console.log(currentArray)
         currentArray.forEach(task => DOM.createTaskCard(task))
     } 
 
@@ -222,7 +223,9 @@ const DOM = (() => {
     
     function logArrayListener() {
         let logArrayBtn = document.querySelector('#logArrayBtn')
-        logArrayBtn.addEventListener('click', function () {looper(taskArray['taskStorage'])})
+        logArrayBtn.addEventListener('click', function () {
+            taskArray.filterbyPastDue()
+        })
     }
     return { createUI, 
         overLayRendered, 
