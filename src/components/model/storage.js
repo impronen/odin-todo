@@ -1,4 +1,6 @@
-
+const dayjs = require('dayjs')
+//import dayjs from 'dayjs' // ES 2015
+dayjs().format()
 
 const taskArray = {
     taskStorage: [],
@@ -13,6 +15,16 @@ const taskArray = {
         let dueToday = taskArray.taskStorage.filter(Object => Object.isTheDate() === 0)
         console.log(dueToday)
         return dueToday
+    },
+    filterbyDueThisWeek: function() {
+        let dueThisWeek = taskArray.taskStorage.filter(Object => Object.isTheWeek() === true)
+        console.log(dueThisWeek)
+        return dueThisWeek
+    },
+    filterbyDueThisMonth: function() {
+        let dueThisMonth= taskArray.taskStorage.filter(Object => Object.isTheMonth() === true)
+        console.log(dueThisMonth)
+        return dueThisMonth
     },
     filterbyPastDue: function() {
         let pastDue = taskArray.taskStorage.filter(Object => Object.isTheDate() > 0)

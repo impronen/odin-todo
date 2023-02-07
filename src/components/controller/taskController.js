@@ -1,4 +1,7 @@
 import date from 'date-and-time';
+const dayjs = require('dayjs')
+//import dayjs from 'dayjs' // ES 2015
+dayjs().format()
 
 class newProject {
     constructor(project) {
@@ -63,7 +66,7 @@ class newTask extends newProject {
         }
     }
 
-    //Other methods
+    //Methods to show is the task due in how many days or this week etc
     isTheDate() {
         let today = new Date().getTime()
         let dueDate = this.dueDate
@@ -72,9 +75,13 @@ class newTask extends newProject {
         console.log(`Task is due in ${days} days.`)
         return days
     }
-
-    projectConnector() {
-
+    isTheWeek() {
+        let week = dayjs().isSame(this.dueDate, 'week')
+        return week
+    }
+    isTheMonth() {
+        let month = dayjs().isSame(this.dueDate, 'month')
+        return month
     }
 }
 

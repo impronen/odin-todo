@@ -65,7 +65,7 @@ const DOM = (() => {
         sidebar.appendChild(dueTodayButton)
 
         let logArrayBtn = document.createElement('button');
-        logArrayBtn.innerHTML = "Log late"
+        logArrayBtn.innerHTML = "Log month due"
         logArrayBtn.setAttribute('id', 'logArrayBtn')
         logArrayBtn.classList.add('buttonstyle2') 
         sidebar.appendChild(logArrayBtn)
@@ -224,7 +224,8 @@ const DOM = (() => {
     function logArrayListener() {
         let logArrayBtn = document.querySelector('#logArrayBtn')
         logArrayBtn.addEventListener('click', function () {
-            taskArray.filterbyPastDue()
+            taskArray.filterbyDueThisMonth()
+
         })
     }
     return { createUI, 
