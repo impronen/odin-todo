@@ -83,6 +83,12 @@ class newTask extends newProject {
         let month = dayjs().isSame(this.dueDate, 'month')
         return month
     }
+    convertPriority() {
+        let i = this.priority // High, Normal, Low
+        if (i === "High") {return 2}
+        else if (i === "Normal") {return 1}
+        else {return 0}
+    }
 }
 
 

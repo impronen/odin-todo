@@ -31,6 +31,21 @@ const taskArray = {
         console.log(pastDue)
         return pastDue
     },
+    sortImportance: function(order) {
+        if (order === "descending") {
+            return taskArray.taskStorage.sort((a, b) => (a.convertPriority() > b.convertPriority()) ? -1 : 1)
+        } else {
+            return taskArray.taskStorage.sort((a, b) => (a.convertPriority() > b.convertPriority()) ? 1 : -1)
+        }
+    },
+    sortByDate: function(order) {
+        if (order === "descending") {
+            return taskArray.taskStorage.sort((a, b) => (a.getDate() > b.getDate()) ? -1 : 1)
+        } else {
+            return taskArray.taskStorage.sort((a, b) => (a.getDate() > b.getDate()) ? 1 : -1)
+        }
+    }
+    
 }
 
 
