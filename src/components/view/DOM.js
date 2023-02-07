@@ -224,7 +224,7 @@ const DOM = (() => {
     function logArrayListener() {
         let logArrayBtn = document.querySelector('#logArrayBtn')
         logArrayBtn.addEventListener('click', function () {
-            arrayPrinter(taskArray.sortImportance("descending"))
+            arrayPrinter(taskArray.sortProject())
 
         })
     }
