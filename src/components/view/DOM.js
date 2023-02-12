@@ -51,10 +51,16 @@ const DOM = (() => {
     sidebar.appendChild(dueTodayButton);
 
     const logArrayBtn = document.createElement("button");
-    logArrayBtn.innerHTML = "Acending importance";
+    logArrayBtn.innerHTML = "Save to local";
     logArrayBtn.setAttribute("id", "logArrayBtn");
     logArrayBtn.classList.add("buttonstyle2");
     sidebar.appendChild(logArrayBtn);
+
+    const pushFromLocal = document.createElement("button");
+    pushFromLocal.innerHTML = "Push local to array";
+    pushFromLocal.setAttribute("id", "pushFromLocal");
+    pushFromLocal.classList.add("buttonstyle2");
+    sidebar.appendChild(pushFromLocal);
 
     // Create List for projects that cycles the content from projects on storage array
   }
@@ -120,15 +126,6 @@ const DOM = (() => {
     cardRightSide.appendChild(rightLowSideCont);
   }
 
-  function overLayRendered() {
-    const content = document.querySelector(".taskDisplay");
-    const inputOverlay = document.createElement("div");
-    inputOverlay.setAttribute("id", "inputOverlay");
-    inputOverlay.className = "inputOverlay";
-    content.appendChild(inputOverlay);
-    formCreator();
-  }
-
   function formCreator() {
     const overlay = document.querySelector("#inputOverlay");
 
@@ -180,6 +177,15 @@ const DOM = (() => {
     addToTaskListListener();
   }
 
+  function overLayRendered() {
+    const content = document.querySelector(".taskDisplay");
+    const inputOverlay = document.createElement("div");
+    inputOverlay.setAttribute("id", "inputOverlay");
+    inputOverlay.className = "inputOverlay";
+    content.appendChild(inputOverlay);
+    formCreator();
+  }
+
   function overLayDestroyer() {
     const overlay = document.querySelector(".inputOverlay");
     overlay.remove();
@@ -222,15 +228,26 @@ const DOM = (() => {
   function logArrayListener() {
     const logArrayBtn = document.querySelector("#logArrayBtn");
     logArrayBtn.addEventListener("click", () => {
-      arrayPrinter(taskArray.sortProject());
+      taskArray.pushToLocal();
+      console.log("JOO")
     });
   }
+
+  function pushLocal() {
+    const logLocalBtn = document.querySelector("#pushFromLocal");
+    logLocalBtn.addEventListener("click", () => {
+      taskArray.pullFromLocal()
+
+    });
+  }
+
   return {
     createUI,
     overLayRendered,
     createTaskCard,
     addToTaskListListener,
     logArrayListener,
+    pushLocal,
     arrayPrinter,
   };
 })();

@@ -7,9 +7,17 @@ const taskArray = {
 
     // Functions to manage local storage
 
+    pushToLocal() {
+        localStorage.setItem('localTaskStorage', JSON.stringify(taskArray.taskStorage))
+    },
+    pullFromLocal() {
+        const projectObjects = JSON.parse(window.localStorage.getItem('localTaskStorage'))
+        taskArray.taskStorage.push(projectObjects);
+        console.log(taskArray.taskStorage)
+    },
     checkLocalOnLoad() {
         if (localStorage.length > 0) {
-            // Push local storage to taskStorage
+            taskArray.pullFromLocal()
         }
     },
 
@@ -21,7 +29,6 @@ const taskArray = {
         );
         return projectTasks;
     },
-
     filterbyDueToday() {
         const dueToday = taskArray.taskStorage.filter(
             (Object) => Object.isTheDate() === 0
@@ -46,6 +53,9 @@ const taskArray = {
         );
         return pastDue;
     },
+
+    // Sort functions 
+
     sortImportance(order) {
         if (order === "descending") {
             return taskArray.taskStorage.sort((a, b) =>
