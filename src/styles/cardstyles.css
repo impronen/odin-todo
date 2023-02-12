@@ -1,38 +1,39 @@
 .taskCard {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    width: 250px;
-    margin: 20px;
-    border-style: groove;
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 250px;
+  margin: 20px;
+  border-style: groove;
+}
 
-  .cardLeftSide, .cardRightSide {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
+.cardLeftSide,
+.cardRightSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 
-  .cardLeftSide {
-    align-items: center;
-    height: 100%;
-    width: 40%;
-  }
+.cardLeftSide {
+  align-items: center;
+  height: 100%;
+  width: 40%;
+}
 
-  .cardRightSide {
-    height: 100%;
-    width: 60%;
-  }
+.cardRightSide {
+  height: 100%;
+  width: 60%;
+}
 
-  .rightTopSideCont {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
+.rightTopSideCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 
-  .rightLowSideCont {
-    display: flex;
-    justify-content: center;
-  }
+.rightLowSideCont {
+  display: flex;
+  justify-content: center;
+}

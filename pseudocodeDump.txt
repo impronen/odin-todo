@@ -1,3 +1,17 @@
+12/2/2023
+
+Use of local storage.
+
+
+model / storage has taskArray.taskStorage
+
+On load, index.js/main.js has a check of if localstorage lenght is > 0,
+if it is ==> the contents of local storage are pushed to taskStorage
+
+While using the app, after updates to DOM and storage have been made,
+localstorage is purged and taskStorage is again pushed there.
+
+
 Updates for 1/2/2023
 
 Decided to wrap storage and all DOM stuff to IIFE style. 

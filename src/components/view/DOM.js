@@ -1,242 +1,238 @@
-import { newTask } from "../controller/taskController"
-import { taskArray } from "../model/storage"
-import 'material-symbols';
+import { newTask } from "../controller/taskController";
+import { taskArray } from "../model/storage";
+import "material-symbols";
 
 const DOM = (() => {
+  const content = document.querySelector(".content");
 
+  function createHeader() {
+    const header = document.createElement("div");
+    header.classList.add("header");
+    content.appendChild(header);
 
-    let content = document.querySelector(".content")
+    const logo = document.createElement("div");
+    logo.innerHTML = `<h1>taskLister</h1>`;
+    logo.classList.add("headerlogo");
+    header.appendChild(logo);
 
-    function createUI() {
-        createHeader()
-        createMain()
-        createSidebar()
-        createTaskDisplay()
-    }
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("buttonContainer");
+    header.appendChild(buttonContainer);
 
-    function createHeader() {
-        let header = document.createElement('div');
-        header.classList.add('header')
-        content.appendChild(header)
+    const addTaskButton = document.createElement("button");
+    addTaskButton.innerHTML = "New Task";
+    addTaskButton.setAttribute("id", "addTaskButton");
+    addTaskButton.classList.add("buttonstyle1");
+    buttonContainer.appendChild(addTaskButton);
+  }
 
-        let logo = document.createElement('div');
-        logo.innerHTML = `<h1>taskLister</h1>`
-        logo.classList.add('headerlogo')
-        header.appendChild(logo)
+  function createMain() {
+    const main = document.createElement("div");
+    main.classList.add("main");
+    content.appendChild(main);
+  }
 
-        let buttonContainer = document.createElement('div');
-        buttonContainer.classList.add('buttonContainer')
-        header.appendChild(buttonContainer)
+  function createSidebar() {
+    const main = document.querySelector(".main");
+    const sidebar = document.createElement("div");
+    sidebar.classList.add("sidebar");
+    main.appendChild(sidebar);
 
+    const allTasksButton = document.createElement("button");
+    allTasksButton.innerHTML = "All tasks";
+    allTasksButton.setAttribute("id", "allTasksButton");
+    allTasksButton.classList.add("buttonstyle2");
+    sidebar.appendChild(allTasksButton);
 
-        let addTaskButton = document.createElement('button');
-        addTaskButton.innerHTML = "New Task"
-        addTaskButton.setAttribute('id', 'addTaskButton') 
-        addTaskButton.classList.add('buttonstyle1')
-        buttonContainer.appendChild(addTaskButton)
+    const dueTodayButton = document.createElement("button");
+    dueTodayButton.innerHTML = "Due today";
+    dueTodayButton.setAttribute("id", "dueTodayButton");
+    dueTodayButton.classList.add("buttonstyle2");
+    sidebar.appendChild(dueTodayButton);
 
-        
-        
-        
-    }
+    const logArrayBtn = document.createElement("button");
+    logArrayBtn.innerHTML = "Acending importance";
+    logArrayBtn.setAttribute("id", "logArrayBtn");
+    logArrayBtn.classList.add("buttonstyle2");
+    sidebar.appendChild(logArrayBtn);
 
-    function createMain() {
-        let main = document.createElement('div');
-        main.classList.add('main')
-        content.appendChild(main)
-    }
+    // Create List for projects that cycles the content from projects on storage array
+  }
 
-    function createSidebar () {
-        let main = document.querySelector(".main")
-        let sidebar = document.createElement('div');
-        sidebar.classList.add('sidebar')
-        main.appendChild(sidebar)
+  function createTaskDisplay() {
+    const main = document.querySelector(".main");
+    const taskDisplay = document.createElement("div");
+    taskDisplay.classList.add("taskDisplay");
+    main.appendChild(taskDisplay);
+  }
 
-        let allTasksButton = document.createElement('button');
-        allTasksButton.innerHTML = "All tasks"
-        allTasksButton.setAttribute('id', 'allTasksButton')
-        allTasksButton.classList.add('buttonstyle2')
-        sidebar.appendChild(allTasksButton)
+  function arrayPrinter(currentArray) {
+    // Use as cleaner & rebuilder of cards visible to user
+    const oldCards = document
+      .querySelectorAll(".taskCard")
+      .forEach((e) => e.remove());
+    console.log(currentArray);
+    currentArray.forEach((task) => DOM.createTaskCard(task));
+  }
 
-        let dueTodayButton = document.createElement('button');
-        dueTodayButton.innerHTML = "Due today"
-        dueTodayButton.setAttribute('id', 'dueTodayButton')
-        dueTodayButton.classList.add('buttonstyle2')
-        sidebar.appendChild(dueTodayButton)
+  function createTaskCard(task) {
+    const taskDisplay = document.querySelector(".taskDisplay");
 
-        let logArrayBtn = document.createElement('button');
-        logArrayBtn.innerHTML = "Acending importance"
-        logArrayBtn.setAttribute('id', 'logArrayBtn')
-        logArrayBtn.classList.add('buttonstyle2') 
-        sidebar.appendChild(logArrayBtn)
-            
+    const taskCard = document.createElement("div");
+    taskCard.classList.add("taskCard");
+    taskDisplay.appendChild(taskCard);
 
-        //Create List for projects that cycles the content from projects on storage array
-    }
+    const cardLeftSide = document.createElement("div");
+    cardLeftSide.classList.add("cardLeftSide");
+    taskCard.appendChild(cardLeftSide);
 
-    function createTaskDisplay() {
-        let main = document.querySelector(".main")
-        let taskDisplay = document.createElement('div');
-        taskDisplay.classList.add('taskDisplay')
-        main.appendChild(taskDisplay)
-    }
+    const taskName = document.createElement("div");
+    taskName.classList.add("taskName");
+    taskName.innerHTML = task.getName();
+    cardLeftSide.appendChild(taskName);
 
-    function arrayPrinter(currentArray) { //Use as cleaner & rebuilder of cards visible to user
-        let oldCards = document.querySelectorAll(".taskCard").forEach(e => e.remove());
-        console.log(currentArray)
-        currentArray.forEach(task => DOM.createTaskCard(task))
-    } 
+    const projectName = document.createElement("div");
+    projectName.classList.add("projectName");
+    projectName.innerHTML = task.getProject();
+    cardLeftSide.appendChild(projectName);
 
-    function createTaskCard(task)  {
-        let taskDisplay = document.querySelector(".taskDisplay")
+    const cardRightSide = document.createElement("div");
+    cardRightSide.classList.add("cardRightSide");
+    taskCard.appendChild(cardRightSide);
 
-        let taskCard = document.createElement('div')
-        taskCard.classList.add('taskCard')
-        taskDisplay.appendChild(taskCard)
+    const rightTopSideCont = document.createElement("div");
+    rightTopSideCont.classList.add("rightTopSideCont");
+    cardRightSide.appendChild(rightTopSideCont);
 
-        let cardLeftSide = document.createElement('div')
-        cardLeftSide.classList.add('cardLeftSide')
-        taskCard.appendChild(cardLeftSide)
+    const editButtonCont = document.createElement("div");
+    editButtonCont.classList.add("editButtonCont");
+    editButtonCont.innerHTML = `<span class="material-symbols-rounded">edit_note</span><span class="material-symbols-rounded">delete</span>`;
+    rightTopSideCont.appendChild(editButtonCont);
 
-        let taskName = document.createElement('div')
-        taskName.classList.add('taskName')
-        taskName.innerHTML = task.getName()
-        cardLeftSide.appendChild(taskName)
+    const taskDoneCheckbox = document.createElement("div");
+    taskDoneCheckbox.classList.add("taskDoneCheckbox");
+    taskDoneCheckbox.innerHTML = `<input type="checkbox" id="taskdone" name="taskdone"><label for="taskdone">Done</label>`;
+    rightTopSideCont.appendChild(taskDoneCheckbox);
 
-        let projectName = document.createElement('div')
-        projectName.classList.add('projectName')
-        projectName.innerHTML = task.getProject()
-        cardLeftSide.appendChild(projectName)
+    const rightLowSideCont = document.createElement("div");
+    rightLowSideCont.classList.add("rightLowSideCont");
+    rightLowSideCont.innerHTML = `Due in ${task.isTheDate()} days`;
+    cardRightSide.appendChild(rightLowSideCont);
+  }
 
-        let cardRightSide = document.createElement('div')
-        cardRightSide.classList.add('cardRightSide')
-        taskCard.appendChild(cardRightSide)
+  function overLayRendered() {
+    const content = document.querySelector(".taskDisplay");
+    const inputOverlay = document.createElement("div");
+    inputOverlay.setAttribute("id", "inputOverlay");
+    inputOverlay.className = "inputOverlay";
+    content.appendChild(inputOverlay);
+    formCreator();
+  }
 
-        let rightTopSideCont = document.createElement('div')
-        rightTopSideCont.classList.add('rightTopSideCont')
-        cardRightSide.appendChild(rightTopSideCont)
+  function formCreator() {
+    const overlay = document.querySelector("#inputOverlay");
 
-        let editButtonCont = document.createElement('div')
-        editButtonCont.classList.add('editButtonCont')
-        editButtonCont.innerHTML = `<span class="material-symbols-rounded">edit_note</span><span class="material-symbols-rounded">delete</span>`
-        rightTopSideCont.appendChild(editButtonCont)
+    const form = document.createElement("form");
+    form.setAttribute("method", "post");
 
-        let taskDoneCheckbox = document.createElement('div')
-        taskDoneCheckbox.classList.add('taskDoneCheckbox')
-        taskDoneCheckbox.innerHTML = `<input type="checkbox" id="taskdone" name="taskdone"><label for="taskdone">Done</label>`
-        rightTopSideCont.appendChild(taskDoneCheckbox)
+    const taskName = document.createElement("input");
+    taskName.setAttribute("type", "text");
+    taskName.setAttribute("name", "taskName");
+    taskName.setAttribute("placeholder", "Task");
 
-        let rightLowSideCont = document.createElement('div')
-        rightLowSideCont.classList.add('rightLowSideCont')
-        rightLowSideCont.innerHTML = `Due in ${task.isTheDate()} days`
-        cardRightSide.appendChild(rightLowSideCont)
+    const projectName = document.createElement("input");
+    projectName.setAttribute("type", "text");
+    projectName.setAttribute("name", "projectName");
+    projectName.setAttribute("placeholder", "Project");
 
+    const priority = document.createElement("input");
+    priority.setAttribute("type", "select");
+    priority.setAttribute("name", "priority");
+    priority.setAttribute("value", "High");
+    priority.setAttribute("value", "Normal");
+    priority.setAttribute("value", "Low");
 
-    }
+    const dueDate = document.createElement("input");
+    dueDate.setAttribute("type", "date");
+    dueDate.setAttribute("id", "selectedDate");
 
-    function overLayRendered () {
-        let content = document.querySelector(".taskDisplay")
-        let inputOverlay = document.createElement('div')
-        inputOverlay.setAttribute('id', 'inputOverlay')
-        inputOverlay.className = "inputOverlay"
-        content.appendChild(inputOverlay)
-        formCreator ()
-    }
-    
-    function formCreator () {
-        let overlay = document.querySelector("#inputOverlay");
-    
-        let form = document.createElement("form");
-        form.setAttribute("method", "post");
-    
-        let taskName = document.createElement("input");
-        taskName.setAttribute("type", "text");
-        taskName.setAttribute("name", "taskName");
-        taskName.setAttribute("placeholder", "Task");
-        
-        let projectName = document.createElement("input");
-        projectName.setAttribute("type", "text");
-        projectName.setAttribute("name", "projectName");
-        projectName.setAttribute("placeholder", "Project");
-    
-        let priority = document.createElement("input");
-        priority.setAttribute("type", "select")
-        priority.setAttribute("name", "priority")
-        priority.setAttribute("value", "High")
-        priority.setAttribute("value", "Normal")
-        priority.setAttribute("value", "Low")
-    
-        let dueDate = document.createElement('input');
-        dueDate.setAttribute("type", "date")
-        dueDate.setAttribute("id", "selectedDate")
-        
-        let info = document.createElement("input");
-        info.setAttribute("type", "textarea")
-        info.setAttribute("name", "info")
-        info.setAttribute("rows", "5")
-        info.setAttribute("cols", "30")
-        info.setAttribute("placeholder", "Notes")
-        
-        form.appendChild(taskName)
-        form.appendChild(projectName)
-        form.appendChild(priority)
-        form.appendChild(dueDate)
-        form.appendChild(info)
-    
-        overlay.appendChild(form)
+    const info = document.createElement("input");
+    info.setAttribute("type", "textarea");
+    info.setAttribute("name", "info");
+    info.setAttribute("rows", "5");
+    info.setAttribute("cols", "30");
+    info.setAttribute("placeholder", "Notes");
 
-        let addToTaskList = document.createElement('button');
-        addToTaskList.innerHTML = "Add task to list"
-        addToTaskList.setAttribute('id', 'addToTaskList')
-        addToTaskList.classList.add('buttonstyle1')
+    form.appendChild(taskName);
+    form.appendChild(projectName);
+    form.appendChild(priority);
+    form.appendChild(dueDate);
+    form.appendChild(info);
 
-        overlay.appendChild(addToTaskList)
-        addToTaskListListener()
+    overlay.appendChild(form);
 
-    }
-    
-    function overLayDestroyer() {
-        let overlay = document.querySelector('.inputOverlay')
-        overlay.remove()
-    
-    }
+    const addToTaskList = document.createElement("button");
+    addToTaskList.innerHTML = "Add task to list";
+    addToTaskList.setAttribute("id", "addToTaskList");
+    addToTaskList.classList.add("buttonstyle1");
 
+    overlay.appendChild(addToTaskList);
+    addToTaskListListener();
+  }
 
-    function addToTaskListListener() {
-        let buttonListener2 = document.querySelector('#addToTaskList')
-    
-        buttonListener2.addEventListener('click', function(){
-            let form = document.querySelector('#inputOverlay')
-            let name = form.querySelector('input[name="taskName"]').value
-            let project = form.querySelector('input[name="projectName"]').value
-            let priority = form.querySelector('input[name="priority"]').value
-            let date = form.querySelector('input[id="selectedDate"]').value
-            let info = form.querySelector('input[name="info"]').value
-            
-            const newTask1 = new newTask(name, project, priority, new Date(`${date}T00:00`), info)
-            taskArray['taskStorage'].push(newTask1)
-            newTask1.isTheDate()
-            overLayDestroyer()
-            arrayPrinter(taskArray['taskStorage'])
-        })
-    }
-    
-    function logArrayListener() {
-        let logArrayBtn = document.querySelector('#logArrayBtn')
-        logArrayBtn.addEventListener('click', function () {
-            arrayPrinter(taskArray.sortProject())
+  function overLayDestroyer() {
+    const overlay = document.querySelector(".inputOverlay");
+    overlay.remove();
+  }
 
-        })
-    }
-    return { createUI, 
-        overLayRendered, 
-        createTaskCard,
-        addToTaskListListener, 
-        logArrayListener,
-        arrayPrinter }
-})()
+  function createUI() {
+    createHeader();
+    createMain();
+    createSidebar();
+    createTaskDisplay();
+  }
 
+  // Event listeners 
 
-export {
-    DOM
-}
+  function addToTaskListListener() {
+    const buttonListener2 = document.querySelector("#addToTaskList");
+
+    buttonListener2.addEventListener("click", () => {
+      const form = document.querySelector("#inputOverlay");
+      const name = form.querySelector('input[name="taskName"]').value;
+      const project = form.querySelector('input[name="projectName"]').value;
+      const priority = form.querySelector('input[name="priority"]').value;
+      const date = form.querySelector('input[id="selectedDate"]').value;
+      const info = form.querySelector('input[name="info"]').value;
+
+      const newTask1 = new newTask(
+        name,
+        project,
+        priority,
+        new Date(`${date}T00:00`),
+        info
+      );
+      taskArray.taskStorage.push(newTask1);
+      newTask1.isTheDate();
+      overLayDestroyer();
+      arrayPrinter(taskArray.taskStorage);
+    });
+  }
+
+  function logArrayListener() {
+    const logArrayBtn = document.querySelector("#logArrayBtn");
+    logArrayBtn.addEventListener("click", () => {
+      arrayPrinter(taskArray.sortProject());
+    });
+  }
+  return {
+    createUI,
+    overLayRendered,
+    createTaskCard,
+    addToTaskListListener,
+    logArrayListener,
+    arrayPrinter,
+  };
+})();
+
+export { DOM };

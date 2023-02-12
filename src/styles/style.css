@@ -1,42 +1,42 @@
 .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    height: 10vh;
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 10vh;
+}
 
-  .main {
-    display: flex;
-    flex-direction: row;
-  }
+.main {
+  display: flex;
+  flex-direction: row;
+}
 
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    width: 10vw;
-    height: 90vh;
-  }
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 10vw;
+  height: 90vh;
+}
 
-  .taskDisplay {
-    display: flex;
-    width: 90vh;
-    height: 90vh;
-  }
+.taskDisplay {
+  display: flex;
+  width: 90vh;
+  height: 90vh;
+}
 
-  .inputOverlay {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #E46C00;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    height: 20vh;
-    width: 60vw;
-    padding: 15px;
-    z-index: 7;
-    position: absolute;
-    font-size: large;
-    margin: 20px;
-  }
-
-
+.inputOverlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e46c00;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  height: 20vh;
+  width: 60vw;
+  padding: 15px;
+  z-index: 7;
+  position: absolute;
+  font-size: large;
+  margin: 20px;
+}

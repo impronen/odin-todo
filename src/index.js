@@ -1,18 +1,15 @@
-import './styles/style.css';
-import './styles/cardstyles.css';
-import date from 'date-and-time';
-import { newTask } from './components/controller/taskController.js';
-import { taskArray } from './components/model/storage.js'
-import { DOM } from './components/view/DOM';
+import "./styles/style.css";
+import "./styles/cardstyles.css";
+import { newTask } from "./components/controller/taskController.js";
+import { taskArray } from "./components/model/storage";
+import { DOM } from "./components/view/DOM";
 
+DOM.createUI();
 
-DOM.createUI()
+const buttonListener = document.querySelector("#addTaskButton");
+buttonListener.addEventListener("click", DOM.overLayRendered);
 
-let buttonListener = document.querySelector('#addTaskButton')
-buttonListener.addEventListener('click', DOM.overLayRendered)
-
-DOM.arrayPrinter(taskArray['taskStorage'])
+DOM.arrayPrinter(taskArray.taskStorage);
 
 /* DOM.addToTaskListListener() */
-DOM.logArrayListener()
-
+DOM.logArrayListener();
