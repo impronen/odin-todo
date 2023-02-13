@@ -5,7 +5,7 @@ import { taskArray } from "./components/model/storage";
 import { DOM } from "./components/view/DOM";
 
 DOM.createUI();
-taskArray.checkLocalOnLoad()
+/* taskArray.checkLocalOnLoad() */
 
 const buttonListener = document.querySelector("#addTaskButton");
 buttonListener.addEventListener("click", DOM.overLayRendered);

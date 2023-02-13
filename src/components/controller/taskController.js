@@ -7,111 +7,111 @@ const dayjs = require("dayjs");
 dayjs().format();
 
 class newProject {
-    constructor(project) {
-        this.project = project;
-    }
+  constructor(project) {
+    this.project = project;
+  }
 
-    getProject() {
-        return this.project;
-    }
+  getProject() {
+    return this.project;
+  }
 
-    changeProject(x) {
-        // this needs further work once project management is implemented
-        return (this.project = x);
-    }
+  changeProject(x) {
+    // this needs further work once project management is implemented
+    return (this.project = x);
+  }
 }
 
 class newTask extends newProject {
-    constructor(name, project, priority, dueDate, info, uuid) {
-        super(project);
-        this.name = name;
-        this.priority = priority;
-        this.dueDate = dueDate;
-        this.info = info;
-        this.isCompleted = false;
-        if (uuid === null) {
-            this.uuid = crypto.randomUUID();
-        } else {
-            this.uuid = uuid;
-        }
+  constructor(name, project, priority, dueDate, info, uuid) {
+    super(project);
+    this.name = name;
+    this.priority = priority;
+    this.dueDate = dueDate;
+    this.info = info;
+    this.isCompleted = false;
+    if (uuid === null) {
+      this.uuid = crypto.randomUUID();
+    } else {
+      this.uuid = uuid;
     }
+  }
 
-    // Getters
-    getName() {
-        return this.name;
-    }
+  // Getters
+  getName() {
+    return this.name;
+  }
 
-    getDate() {
-        const exportDate = date.format(this.dueDate, "DD/MM");
-        return exportDate;
-    }
+  getDate() {
+    const exportDate = date.format(this.dueDate, "DD/MM");
+    return exportDate;
+  }
 
-    getInfo() {
-        return this.info;
-    }
+  getInfo() {
+    return this.info;
+  }
 
-    getCompletion() {
-        return this.isCompleted;
-    }
+  getCompletion() {
+    return this.isCompleted;
+  }
 
-    getUuid() {
-        return this.uuid;
-    }
+  getUuid() {
+    return this.uuid;
+  }
 
-    // Changers
-    changeName(x) {
-        return (this.name = x);
-    }
+  // Changers
+  changeName(x) {
+    return (this.name = x);
+  }
 
-    changePriority(x) {
-        return (this.priority = x);
-    }
+  changePriority(x) {
+    return (this.priority = x);
+  }
 
-    changeDate(x) {
-        return (this.dueDate = x);
-    }
+  changeDate(x) {
+    return (this.dueDate = x);
+  }
 
-    changeInfo(x) {
-        return (this.info = x);
-    }
+  changeInfo(x) {
+    return (this.info = x);
+  }
 
-    changeCompletion() {
-        if (this.isCompleted === false) {
-            return (this.isCompleted = true);
-        }
-        return (this.isCompleted = false);
+  changeCompletion() {
+    if (this.isCompleted === false) {
+      return (this.isCompleted = true);
     }
+    return (this.isCompleted = false);
+  }
 
-    // Methods to show is the task due in how many days or this week etc
-    isTheDate() {
-        const today = new Date().getTime();
-        const { dueDate } = this;
-        const difference = dueDate.getTime() - today;
-        const days = Math.ceil(difference / (1000 * 3600 * 24));
-        console.log(`Task is due in ${days} days.`);
-        return days;
-    }
+  // Methods to show is the task due in how many days or this week etc
+  isTheDate() {
+    const today = new Date().getTime();
+    const { dueDate } = this;
+    const difference = dueDate.getTime() - today;
+    const days = Math.ceil(difference / (1000 * 3600 * 24));
+    console.log(`Task is due in ${days} days.`);
+    return days;
+  }
 
-    isTheWeek() {
-        const week = dayjs().isSame(this.dueDate, "week");
-        return week;
-    }
+  isTheWeek() {
+    const week = dayjs().isSame(this.dueDate, "week");
+    return week;
+  }
 
-    isTheMonth() {
-        const month = dayjs().isSame(this.dueDate, "month");
-        return month;
-    }
+  isTheMonth() {
+    const month = dayjs().isSame(this.dueDate, "month");
+    return month;
+  }
 
-    convertPriority() {
-        const i = this.priority; // High, Normal, Low
-        if (i === "High") {
-            return 2;
-        }
-        if (i === "Normal") {
-            return 1;
-        }
-        return 0;
+  convertPriority() {
+    const i = this.priority; // High, Normal, Low
+    if (i === "High") {
+      return 2;
     }
+    if (i === "Normal") {
+      return 1;
+    }
+    return 0;
+  }
 }
 
 export { newTask };

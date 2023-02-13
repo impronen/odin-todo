@@ -1,3 +1,5 @@
+import { newTask } from "../controller/taskController";
+
 const dayjs = require("dayjs");
 // import dayjs from 'dayjs' // ES 2015
 dayjs().format();
@@ -8,16 +10,30 @@ const taskArray = {
     // Functions to manage local storage
 
     pushToLocal() {
-        localStorage.setItem('localTaskStorage', JSON.stringify(taskArray.taskStorage))
+        taskArray.taskStorage.forEach((element) => {
+            console.log(element);
+            localStorage.setItem(element.uuid, JSON.stringify(element));
+        });
     },
     pullFromLocal() {
-        const projectObjects = JSON.parse(window.localStorage.getItem('localTaskStorage'))
-        taskArray.taskStorage.push(projectObjects);
+        Object.keys(localStorage).forEach((key) => {
+            const storageObject = JSON.parse(localStorage.getItem(key))
+            console.log(storageObject);
+            const taskFromStorage = new newTask(
+                storageObject.name,
+                storageObject.project,
+                storageObject.priority,
+                storageObject.dueDate,
+                storageObject.info,
+                storageObject.uuid
+            )
+            taskArray.taskStorage.push(taskFromStorage)
+        });
         console.log(taskArray.taskStorage)
     },
     checkLocalOnLoad() {
         if (localStorage.length > 0) {
-            taskArray.pullFromLocal()
+            taskArray.pullFromLocal();
         }
     },
 
@@ -54,7 +70,7 @@ const taskArray = {
         return pastDue;
     },
 
-    // Sort functions 
+    // Sort functions
 
     sortImportance(order) {
         if (order === "descending") {

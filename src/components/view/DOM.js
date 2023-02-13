@@ -196,9 +196,10 @@ const DOM = (() => {
     createMain();
     createSidebar();
     createTaskDisplay();
+    arrayPrinter(taskArray.taskStorage);
   }
 
-  // Event listeners 
+  // Event listeners
 
   function addToTaskListListener() {
     const buttonListener2 = document.querySelector("#addToTaskList");
@@ -229,15 +230,14 @@ const DOM = (() => {
     const logArrayBtn = document.querySelector("#logArrayBtn");
     logArrayBtn.addEventListener("click", () => {
       taskArray.pushToLocal();
-      console.log("JOO")
+      console.log("JOO");
     });
   }
 
-  function pushLocal() {
+  function pullFromLocal() {
     const logLocalBtn = document.querySelector("#pushFromLocal");
     logLocalBtn.addEventListener("click", () => {
-      taskArray.pullFromLocal()
-
+      taskArray.pullFromLocal();
     });
   }
 
@@ -247,7 +247,7 @@ const DOM = (() => {
     createTaskCard,
     addToTaskListListener,
     logArrayListener,
-    pushLocal,
+    pullFromLocal,
     arrayPrinter,
   };
 })();
