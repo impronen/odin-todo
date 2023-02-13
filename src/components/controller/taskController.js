@@ -29,7 +29,7 @@ class newTask extends newProject {
     this.dueDate = dueDate;
     this.info = info;
     this.isCompleted = false;
-    if (uuid === null) {
+    if (uuid === undefined) {
       this.uuid = crypto.randomUUID();
     } else {
       this.uuid = uuid;
