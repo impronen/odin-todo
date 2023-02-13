@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable max-classes-per-file */
 import date from "date-and-time";
 
@@ -21,14 +22,18 @@ class newProject {
 }
 
 class newTask extends newProject {
-    constructor(name, project, priority, dueDate, info) {
+    constructor(name, project, priority, dueDate, info, uuid) {
         super(project);
         this.name = name;
         this.priority = priority;
         this.dueDate = dueDate;
         this.info = info;
         this.isCompleted = false;
-        this.uuid = crypto.randomUUID();
+        if (uuid === null) {
+            this.uuid = crypto.randomUUID();
+        } else {
+            this.uuid = uuid;
+        }
     }
 
     // Getters
