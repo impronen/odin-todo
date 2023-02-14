@@ -5,15 +5,24 @@ import "material-symbols";
 const DOM = (() => {
   const content = document.querySelector(".content");
 
+  // Basic UI layout creation
+
   function createHeader() {
     const header = document.createElement("div");
     header.classList.add("header");
     content.appendChild(header);
 
     const logo = document.createElement("div");
-    logo.innerHTML = `<h1>taskLister</h1>`;
+    logo.innerHTML = `<span class="material-symbols-outlined">
+    done_outline
+    </span><h1 class="mainHeading">taskLister</h1>`;
     logo.classList.add("headerlogo");
     header.appendChild(logo);
+
+    const middleTextContainer = document.createElement("div");
+    middleTextContainer.classList.add("middleTextContainer");
+    middleTextContainer.innerHTML = `<h4 class="tagText">organize your life</h3>`;
+    header.appendChild(middleTextContainer);
 
     const buttonContainer = document.createElement("div");
     buttonContainer.classList.add("buttonContainer");
@@ -22,6 +31,7 @@ const DOM = (() => {
     const addTaskButton = document.createElement("button");
     addTaskButton.innerHTML = "New Task";
     addTaskButton.setAttribute("id", "addTaskButton");
+    addTaskButton.setAttribute("type", "button");
     addTaskButton.classList.add("buttonstyle1");
     buttonContainer.appendChild(addTaskButton);
   }
@@ -61,16 +71,30 @@ const DOM = (() => {
     pushFromLocal.setAttribute("id", "pushFromLocal");
     pushFromLocal.classList.add("buttonstyle2");
     sidebar.appendChild(pushFromLocal);
+  }
 
-    // Create List for projects that cycles the content from projects on storage array
+  function createDisplay() {
+    const main = document.querySelector(".main");
+    const display = document.createElement("div");
+    display.classList.add("display");
+    main.appendChild(display);
+  }
+
+  function createTaskFilterMenu() {
+    const display = document.querySelector(".display");
+    const TaskFilterMenu = document.createElement("div");
+    TaskFilterMenu.classList.add("TaskFilterMenu");
+    display.appendChild(TaskFilterMenu);
   }
 
   function createTaskDisplay() {
-    const main = document.querySelector(".main");
+    const display = document.querySelector(".display");
     const taskDisplay = document.createElement("div");
     taskDisplay.classList.add("taskDisplay");
-    main.appendChild(taskDisplay);
+    display.appendChild(taskDisplay);
   }
+
+  // Task displayer creation (cards)
 
   function arrayPrinter(currentArray) {
     // Use as cleaner & rebuilder of cards visible to user
@@ -126,6 +150,8 @@ const DOM = (() => {
     cardRightSide.appendChild(rightLowSideCont);
   }
 
+  // Form and overlay to add new tasks
+
   function formCreator() {
     const overlay = document.querySelector("#inputOverlay");
 
@@ -178,7 +204,7 @@ const DOM = (() => {
   }
 
   function overLayRendered() {
-    const content = document.querySelector(".taskDisplay");
+    const content = document.querySelector(".main");
     const inputOverlay = document.createElement("div");
     inputOverlay.setAttribute("id", "inputOverlay");
     inputOverlay.className = "inputOverlay";
@@ -191,10 +217,14 @@ const DOM = (() => {
     overlay.remove();
   }
 
+  // Function to run on load to draw the UI elements
+
   function createUI() {
     createHeader();
     createMain();
     createSidebar();
+    createDisplay();
+    createTaskFilterMenu();
     createTaskDisplay();
     arrayPrinter(taskArray.taskStorage);
   }

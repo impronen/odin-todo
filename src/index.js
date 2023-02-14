@@ -10,8 +10,8 @@ DOM.createUI();
 const buttonListener = document.querySelector("#addTaskButton");
 buttonListener.addEventListener("click", DOM.overLayRendered);
 
+DOM.pullFromLocal();
 DOM.arrayPrinter(taskArray.taskStorage);
 
 /* DOM.addToTaskListListener() */
 DOM.logArrayListener();
-DOM.pullFromLocal();
