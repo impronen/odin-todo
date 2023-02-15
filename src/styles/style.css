@@ -5,6 +5,11 @@
   --darker-accent-color: #1b98e4;
   --lighter-accent-color: #52c7ec;
   --special-accent-color: #9fa6dc;
+  --orange-accent-color: #e46c00;
+
+  --text-light: #c3e5f0;
+  --text-dark: #09324b;
+  --text: var(--_text-light);
 }
 
 body {
@@ -20,6 +25,7 @@ body {
   align-items: center;
   height: 10vh;
   background-color: var(--green-bg-color);
+  color: var(--text-dark);
 }
 
 .headerlogo {
@@ -39,9 +45,26 @@ body {
 }
 
 .buttonstyle1 {
+  background-color: var(--lighter-accent-color);
+  color: var(--text-dark);
+  border-width: 0px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-style: solid;
+  box-shadow: rgba(0, 0, 0, 0.253) 0px 4px 5px;
 }
 
-.buttonstyle1:is(:hover, :focus) {
+.buttonstyle1:is(:hover) {
+  box-shadow: rgba(0, 0, 0, 0.253) 0px 5px 8px;
+}
+
+.buttonstyle1:is(:focus) {
+  box-shadow: inset 2px 2px 4px #1781c2; /* inset -5px -5px 6px #1fafff; */
+}
+
+.buttonstyle2 {
+  margin: 5px;
 }
 
 .main {
@@ -65,9 +88,9 @@ body {
   content: "";
   position: absolute;
   height: 80vh;
-  width: 2px;
+  width: 1px;
   right: -2px;
-  background-color: var(--special-accent-color);
+  background-color: #36556b;
 }
 
 .display {
@@ -92,7 +115,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #e46c00;
+  background-color: var(--green-bg-color);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -102,5 +125,5 @@ body {
   z-index: 7;
   position: absolute;
   font-size: large;
-  margin: 20px;
+  margin: 15%;
 }
