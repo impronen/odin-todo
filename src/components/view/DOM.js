@@ -42,11 +42,12 @@ const DOM = (() => {
     content.appendChild(main);
   }
 
-  function createSidebar() {
-    const main = document.querySelector(".main");
-    const sidebar = document.createElement("div");
-    sidebar.classList.add("sidebar");
-    main.appendChild(sidebar);
+  // Creating sidebar
+
+  // Sidebar buttons
+
+  function createSidebarButton() {
+    const sidebar = document.querySelector(".sidebar");
 
     const allTasksButton = document.createElement("button");
     allTasksButton.innerHTML = "All tasks";
@@ -60,6 +61,29 @@ const DOM = (() => {
     dueTodayButton.classList.add("buttonstyle2");
     sidebar.appendChild(dueTodayButton);
 
+    const upcomingButton = document.createElement("button");
+    upcomingButton.innerHTML = "Upcoming";
+    upcomingButton.setAttribute("id", "upcomingButton");
+    upcomingButton.classList.add("buttonstyle2");
+    sidebar.appendChild(upcomingButton);
+
+    const completedButton = document.createElement("button");
+    completedButton.innerHTML = "Completed";
+    completedButton.setAttribute("id", "completedButton");
+    completedButton.classList.add("buttonstyle2");
+    sidebar.appendChild(completedButton);
+  }
+
+  // Main sidebar elements
+
+  function createSidebar() {
+    const main = document.querySelector(".main");
+    const sidebar = document.createElement("div");
+    sidebar.classList.add("sidebar");
+    main.appendChild(sidebar);
+
+    createSidebarButton();
+
     const logArrayBtn = document.createElement("button");
     logArrayBtn.innerHTML = "Save to local";
     logArrayBtn.setAttribute("id", "logArrayBtn");
@@ -72,6 +96,8 @@ const DOM = (() => {
     pushFromLocal.classList.add("buttonstyle2");
     sidebar.appendChild(pushFromLocal);
   }
+
+  // Creating right side of screen w/ filter menu & container for tasks
 
   function createDisplay() {
     const main = document.querySelector(".main");
