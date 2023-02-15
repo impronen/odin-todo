@@ -29,7 +29,9 @@ const DOM = (() => {
     header.appendChild(buttonContainer);
 
     const addTaskButton = document.createElement("button");
-    addTaskButton.innerHTML = "New Task";
+    addTaskButton.innerHTML = `<span class="material-symbols-outlined">
+    add_circle
+    </span> Add task`;
     addTaskButton.setAttribute("id", "addTaskButton");
     addTaskButton.setAttribute("type", "button");
     addTaskButton.classList.add("buttonstyle1");
@@ -47,31 +49,39 @@ const DOM = (() => {
   // Sidebar buttons
 
   function createSidebarButton() {
-    const sidebar = document.querySelector(".sidebar");
+    const sideButtonContainer = document.querySelector(".sideButtonContainer");
 
     const allTasksButton = document.createElement("button");
-    allTasksButton.innerHTML = "All tasks";
+    allTasksButton.innerHTML = `<span class="material-symbols-outlined ">
+    view_cozy
+    </span> All tasks`;
     allTasksButton.setAttribute("id", "allTasksButton");
     allTasksButton.classList.add("buttonstyle2");
-    sidebar.appendChild(allTasksButton);
+    sideButtonContainer.appendChild(allTasksButton);
 
     const dueTodayButton = document.createElement("button");
-    dueTodayButton.innerHTML = "Due today";
+    dueTodayButton.innerHTML = `<span class="material-symbols-outlined">
+    today
+    </span> Due today`;
     dueTodayButton.setAttribute("id", "dueTodayButton");
     dueTodayButton.classList.add("buttonstyle2");
-    sidebar.appendChild(dueTodayButton);
+    sideButtonContainer.appendChild(dueTodayButton);
 
     const upcomingButton = document.createElement("button");
-    upcomingButton.innerHTML = "Upcoming";
+    upcomingButton.innerHTML = `<span class="material-symbols-outlined">
+    calendar_month
+    </span> Upcoming`;
     upcomingButton.setAttribute("id", "upcomingButton");
     upcomingButton.classList.add("buttonstyle2");
-    sidebar.appendChild(upcomingButton);
+    sideButtonContainer.appendChild(upcomingButton);
 
     const completedButton = document.createElement("button");
-    completedButton.innerHTML = "Completed";
+    completedButton.innerHTML = `<span class="material-symbols-outlined">
+    checklist_rtl
+    </span> Completed`;
     completedButton.setAttribute("id", "completedButton");
     completedButton.classList.add("buttonstyle2");
-    sidebar.appendChild(completedButton);
+    sideButtonContainer.appendChild(completedButton);
   }
 
   // Main sidebar elements
@@ -82,19 +92,28 @@ const DOM = (() => {
     sidebar.classList.add("sidebar");
     main.appendChild(sidebar);
 
+    const sideButtonContainer = document.createElement("div");
+    sideButtonContainer.classList.add("sideButtonContainer");
+    sidebar.appendChild(sideButtonContainer);
+
     createSidebarButton();
+
+    const projectListContainer = document.createElement("div");
+    projectListContainer.classList.add("projectListContainer");
+    projectListContainer.innerHTML = `<h3 class="projectHeading">Projects</h3>`;
+    sidebar.appendChild(projectListContainer);
 
     const logArrayBtn = document.createElement("button");
     logArrayBtn.innerHTML = "Save to local";
     logArrayBtn.setAttribute("id", "logArrayBtn");
     logArrayBtn.classList.add("buttonstyle2");
-    sidebar.appendChild(logArrayBtn);
+    projectListContainer.appendChild(logArrayBtn);
 
     const pushFromLocal = document.createElement("button");
     pushFromLocal.innerHTML = "Push local to array";
     pushFromLocal.setAttribute("id", "pushFromLocal");
     pushFromLocal.classList.add("buttonstyle2");
-    sidebar.appendChild(pushFromLocal);
+    projectListContainer.appendChild(pushFromLocal);
   }
 
   // Creating right side of screen w/ filter menu & container for tasks
