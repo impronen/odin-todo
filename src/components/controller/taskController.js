@@ -114,4 +114,4 @@ class newTask extends newProject {
   }
 }
 
-export { newTask };
+export default newTask;
