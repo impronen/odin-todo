@@ -80,7 +80,6 @@ li {
 
 .buttonstyle1:is(:focus) {
   box-shadow: inset 2px 2px 6px #202020;
-  /* transition: box-shadow 0.1s ease-in-out; */
 }
 
 .buttonstyle2 {

@@ -100,25 +100,30 @@ const DOM = (() => {
     projectListContainer.classList.add("projectListContainer");
     projectListContainer.innerHTML = `<h3 class="projectHeading">Projects</h3>`;
     sidebar.appendChild(projectListContainer);
+  }
 
-    const logArrayBtn = document.createElement("button");
-    logArrayBtn.innerHTML = "Filter Projects";
-    logArrayBtn.setAttribute("id", "logArrayBtn");
-    logArrayBtn.classList.add("buttonstyle2");
-    projectListContainer.appendChild(logArrayBtn);
+  // Sidebar project list - initialised w/ sidebarProjectList() and items are added w/ addSingleProjectToSidebar
+
+  function projectListRemover() {
+    const projectList = document.querySelector(".projectList");
+    if (projectList != null) {
+      projectList.remove();
+    }
   }
 
   function sidebarProjectList(projectArray) {
+    projectListRemover();
     const projectContainer = document.querySelector(".projectListContainer");
     const projectList = document.createElement("ul");
     projectList.classList.add("projectList");
-    projectContainer.appendChild(projectList);
 
     projectArray.forEach((project) => {
       const listItem = document.createElement("li");
+      listItem.setAttribute("id", `${project}`);
       listItem.innerHTML = `${project}`;
       projectList.appendChild(listItem);
     });
+    projectContainer.appendChild(projectList);
   }
 
   // Creating right side of screen w/ filter menu & container for tasks

@@ -39,11 +39,18 @@ const taskArray = {
       taskArray.pullFromLocal();
     }
   },
-
+  // Filters unique project names to an array - used to have project list in sidebar
   filterProjectNames() {
     const projectNames = taskArray.taskStorage.map((Object) => Object.project);
-    console.log(projectNames);
-    return projectNames;
+    const uniqueProjectNames = [];
+    projectNames.forEach((element) => {
+      if (!uniqueProjectNames.includes(element)) {
+        uniqueProjectNames.push(element);
+      }
+      uniqueProjectNames.sort();
+    });
+    console.log(uniqueProjectNames);
+    return uniqueProjectNames;
   },
   // Filter functions
 
