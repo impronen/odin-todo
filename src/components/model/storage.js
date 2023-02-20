@@ -26,7 +26,7 @@ const taskArray = {
         storageObject.name,
         storageObject.project,
         storageObject.priority,
-        storageObject.dueDate,
+        new Date(`${storageObject.dueDate}`),
         storageObject.info,
         storageObject.uuid
       );
