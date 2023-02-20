@@ -1,4 +1,4 @@
-import newTask from "../controller/taskController";
+import Task from "../controller/taskController";
 
 const dayjs = require("dayjs");
 // import dayjs from 'dayjs' // ES 2015
@@ -22,7 +22,7 @@ const taskArray = {
     Object.keys(localStorage).forEach((key) => {
       const storageObject = JSON.parse(localStorage.getItem(key));
       console.log(storageObject);
-      const taskFromStorage = new newTask(
+      const taskFromStorage = new Task(
         storageObject.name,
         storageObject.project,
         storageObject.priority,

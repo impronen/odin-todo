@@ -142,9 +142,7 @@ const DOM = (() => {
 
   function arrayPrinter(currentArray) {
     // Use as cleaner & rebuilder of cards visible to user
-    const oldCards = document
-      .querySelectorAll(".taskCard")
-      .forEach((e) => e.remove());
+    document.querySelectorAll(".taskCard").forEach((e) => e.remove());
     console.log(currentArray);
     currentArray.forEach((task) => DOM.createTaskCard(task));
   }
@@ -244,15 +242,14 @@ const DOM = (() => {
     addToTaskList.classList.add("buttonstyle1");
 
     overlay.appendChild(addToTaskList);
-    addToTaskListListener();
   }
 
   function overLayRendered() {
-    const content = document.querySelector(".main");
+    const page = document.querySelector(".main");
     const inputOverlay = document.createElement("div");
     inputOverlay.setAttribute("id", "inputOverlay");
     inputOverlay.className = "inputOverlay";
-    content.appendChild(inputOverlay);
+    page.appendChild(inputOverlay);
     formCreator();
   }
 
@@ -278,6 +275,7 @@ const DOM = (() => {
     overLayRendered,
     createTaskCard,
     arrayPrinter,
+    overLayDestroyer,
   };
 })();
 

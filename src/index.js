@@ -1,18 +1,13 @@
 import "./styles/style.css";
 import "./styles/cardstyles.css";
-import newTask from "./components/controller/taskController";
 import taskArray from "./components/model/storage";
 import DOM from "./components/view/DOM";
 import EVENTS from "./components/controller/eventListeners";
 
+// Setting up UI and loading the default task view (all tasks)
+
 DOM.createUI();
-/* taskArray.checkLocalOnLoad() */
+EVENTS.setDefaultViewListeners();
 
-const buttonListener = document.querySelector("#addTaskButton");
-buttonListener.addEventListener("click", DOM.overLayRendered);
-
-EVENTS.pullFromLocal();
+taskArray.checkLocalOnLoad();
 DOM.arrayPrinter(taskArray.taskStorage);
-
-/* DOM.addToTaskListListener() */
-EVENTS.logArrayListener();

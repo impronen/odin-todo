@@ -1,4 +1,4 @@
-import newTask from "./taskController";
+import Task from "./taskController";
 import taskArray from "../model/storage";
 import DOM from "../view/DOM";
 
@@ -14,7 +14,7 @@ const EVENTS = (() => {
       const date = form.querySelector('input[id="selectedDate"]').value;
       const info = form.querySelector('input[name="info"]').value;
 
-      const newTask1 = new newTask(
+      const newTask1 = new Task(
         name,
         project,
         priority,
@@ -26,27 +26,62 @@ const EVENTS = (() => {
       DOM.overLayDestroyer();
       DOM.arrayPrinter(taskArray.taskStorage);
     });
-
-    function logArrayListener() {
-      const logArrayBtn = document.querySelector("#logArrayBtn");
-      logArrayBtn.addEventListener("click", () => {
-        taskArray.pushToLocal();
-        console.log("JOO");
-      });
-    }
-
-    function pullFromLocal() {
-      const logLocalBtn = document.querySelector("#pushFromLocal");
-      logLocalBtn.addEventListener("click", () => {
-        taskArray.pullFromLocal();
-      });
-    }
-    return {
-      addToTaskListListener,
-      logArrayListener,
-      pullFromLocal,
-    };
   }
+
+  function taskAddingOverlayListener() {
+    const addTaskButton = document.querySelector("#addTaskButton");
+    addTaskButton.addEventListener("click", () => {
+      DOM.overLayRendered();
+      addToTaskListListener();
+    });
+  }
+
+  function showAllTasks() {
+    const allTasksButton = document.querySelector("#allTasksButton");
+    allTasksButton.addEventListener("click", () => {
+      console.log("All tasks button");
+    });
+  }
+  function showDueTodayTasks() {
+    const dueTodayButton = document.querySelector("#dueTodayButton");
+    dueTodayButton.addEventListener("click", () => {
+      console.log("Due today button");
+    });
+  }
+
+  function showUpcomingTasks() {
+    const upcomingButton = document.querySelector("#upcomingButton");
+    upcomingButton.addEventListener("click", () => {
+      console.log("Upcoming tasks button");
+    });
+  }
+
+  function setDefaultViewListeners() {
+    taskAddingOverlayListener();
+    showAllTasks();
+    showDueTodayTasks();
+    showUpcomingTasks();
+  }
+
+  function logArrayListener() {
+    const logArrayBtn = document.querySelector("#logArrayBtn");
+    logArrayBtn.addEventListener("click", () => {
+      taskArray.pushToLocal();
+      console.log("JOO");
+    });
+  }
+
+  function pullFromLocal() {
+    const logLocalBtn = document.querySelector("#pushFromLocal");
+    logLocalBtn.addEventListener("click", () => {
+      taskArray.pullFromLocal();
+    });
+  }
+  return {
+    logArrayListener,
+    pullFromLocal,
+    setDefaultViewListeners,
+  };
 })();
 
 export default EVENTS;

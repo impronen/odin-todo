@@ -6,7 +6,7 @@ const dayjs = require("dayjs");
 // import dayjs from 'dayjs' // ES 2015
 dayjs().format();
 
-class newProject {
+class Project {
   constructor(project) {
     this.project = project;
   }
@@ -21,7 +21,7 @@ class newProject {
   }
 }
 
-class newTask extends newProject {
+class Task extends Project {
   constructor(name, project, priority, dueDate, info, uuid) {
     super(project);
     this.name = name;
@@ -114,4 +114,4 @@ class newTask extends newProject {
   }
 }
 
-export default newTask;
+export default Task;
