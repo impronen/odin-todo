@@ -40,6 +40,11 @@ const taskArray = {
     }
   },
 
+  filterProjectNames() {
+    const projectNames = taskArray.taskStorage.map((Object) => Object.project);
+    console.log(projectNames);
+    return projectNames;
+  },
   // Filter functions
 
   filterByProject(projectToFilter) {

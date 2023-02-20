@@ -1,4 +1,3 @@
-import taskArray from "../model/storage";
 import "material-symbols";
 
 const DOM = (() => {
@@ -103,16 +102,23 @@ const DOM = (() => {
     sidebar.appendChild(projectListContainer);
 
     const logArrayBtn = document.createElement("button");
-    logArrayBtn.innerHTML = "Save to local";
+    logArrayBtn.innerHTML = "Filter Projects";
     logArrayBtn.setAttribute("id", "logArrayBtn");
     logArrayBtn.classList.add("buttonstyle2");
     projectListContainer.appendChild(logArrayBtn);
+  }
 
-    const pushFromLocal = document.createElement("button");
-    pushFromLocal.innerHTML = "Push local to array";
-    pushFromLocal.setAttribute("id", "pushFromLocal");
-    pushFromLocal.classList.add("buttonstyle2");
-    projectListContainer.appendChild(pushFromLocal);
+  function sidebarProjectList(projectArray) {
+    const projectContainer = document.querySelector(".projectListContainer");
+    const projectList = document.createElement("ul");
+    projectList.classList.add("projectList");
+    projectContainer.appendChild(projectList);
+
+    projectArray.forEach((project) => {
+      const listItem = document.createElement("li");
+      listItem.innerHTML = `${project}`;
+      projectList.appendChild(listItem);
+    });
   }
 
   // Creating right side of screen w/ filter menu & container for tasks
@@ -143,7 +149,6 @@ const DOM = (() => {
   function arrayPrinter(currentArray) {
     // Use as cleaner & rebuilder of cards visible to user
     document.querySelectorAll(".taskCard").forEach((e) => e.remove());
-    console.log(currentArray);
     currentArray.forEach((task) => DOM.createTaskCard(task));
   }
 
@@ -267,7 +272,6 @@ const DOM = (() => {
     createDisplay();
     createTaskFilterMenu();
     createTaskDisplay();
-    arrayPrinter(taskArray.taskStorage);
   }
 
   return {
@@ -276,6 +280,7 @@ const DOM = (() => {
     createTaskCard,
     arrayPrinter,
     overLayDestroyer,
+    sidebarProjectList,
   };
 })();
 

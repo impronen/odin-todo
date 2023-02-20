@@ -11,3 +11,4 @@ EVENTS.setDefaultViewListeners();
 
 taskArray.checkLocalOnLoad();
 DOM.arrayPrinter(taskArray.taskStorage);
+DOM.sidebarProjectList(taskArray.filterProjectNames());

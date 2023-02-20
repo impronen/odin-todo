@@ -22,6 +22,7 @@ const EVENTS = (() => {
         info
       );
       taskArray.taskStorage.push(newTask1);
+      taskArray.pushToLocal();
       newTask1.isTheDate();
       DOM.overLayDestroyer();
       DOM.arrayPrinter(taskArray.taskStorage);
@@ -56,19 +57,19 @@ const EVENTS = (() => {
     });
   }
 
+  function projectList() {
+    const projectbutton = document.querySelector("#logArrayBtn");
+    projectbutton.addEventListener("click", () => {
+      taskArray.filterProjectNames();
+    });
+  }
+
   function setDefaultViewListeners() {
     taskAddingOverlayListener();
     showAllTasks();
     showDueTodayTasks();
     showUpcomingTasks();
-  }
-
-  function logArrayListener() {
-    const logArrayBtn = document.querySelector("#logArrayBtn");
-    logArrayBtn.addEventListener("click", () => {
-      taskArray.pushToLocal();
-      console.log("JOO");
-    });
+    projectList();
   }
 
   function pullFromLocal() {
@@ -78,9 +79,9 @@ const EVENTS = (() => {
     });
   }
   return {
-    logArrayListener,
     pullFromLocal,
     setDefaultViewListeners,
+    projectList,
   };
 })();
 
