@@ -68,7 +68,7 @@ const DOM = (() => {
     const upcomingButton = document.createElement("button");
     upcomingButton.innerHTML = `<span class="material-symbols-outlined">
     calendar_month
-    </span> Upcoming`;
+    </span> Due this week`;
     upcomingButton.setAttribute("id", "upcomingButton");
     upcomingButton.classList.add("buttonstyle2");
     sideButtonContainer.appendChild(upcomingButton);
@@ -162,6 +162,7 @@ const DOM = (() => {
 
     const taskCard = document.createElement("div");
     taskCard.classList.add("taskCard");
+    taskCard.dataset.uuid = task.getUuid();
     taskDisplay.appendChild(taskCard);
 
     const cardLeftSide = document.createElement("div");
