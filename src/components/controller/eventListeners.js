@@ -41,12 +41,14 @@ const EVENTS = (() => {
   function showAllTasks() {
     const allTasksButton = document.querySelector("#allTasksButton");
     allTasksButton.addEventListener("click", () => {
+      DOM.arrayPrinter(taskArray.taskStorage);
       console.log("All tasks button");
     });
   }
   function showDueTodayTasks() {
     const dueTodayButton = document.querySelector("#dueTodayButton");
     dueTodayButton.addEventListener("click", () => {
+      DOM.arrayPrinter(taskArray.filterbyDueToday());
       console.log("Due today button");
     });
   }
@@ -54,6 +56,7 @@ const EVENTS = (() => {
   function showUpcomingTasks() {
     const upcomingButton = document.querySelector("#upcomingButton");
     upcomingButton.addEventListener("click", () => {
+      DOM.arrayPrinter(taskArray.filterbyDueThisWeek());
       console.log("Upcoming tasks button");
     });
   }
@@ -61,6 +64,7 @@ const EVENTS = (() => {
   function showCompletedTasks() {
     const completedButton = document.querySelector("#completedButton");
     completedButton.addEventListener("click", () => {
+      DOM.arrayPrinter(taskArray.filterCompleted());
       console.log("Completed tasks button");
     });
   }
@@ -73,14 +77,7 @@ const EVENTS = (() => {
     showCompletedTasks();
   }
 
-  function pullFromLocal() {
-    const logLocalBtn = document.querySelector("#pushFromLocal");
-    logLocalBtn.addEventListener("click", () => {
-      taskArray.pullFromLocal();
-    });
-  }
   return {
-    pullFromLocal,
     setDefaultViewListeners,
   };
 })();
