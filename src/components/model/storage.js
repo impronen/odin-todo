@@ -84,6 +84,12 @@ const taskArray = {
     );
     return pastDue;
   },
+  filterCompleted() {
+    const completed = taskArray.taskStorage.filter(
+      (Object) => Object.getCompletion() === true
+    );
+    return completed;
+  },
 
   // Sort functions
 
