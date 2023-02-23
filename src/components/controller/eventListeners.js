@@ -27,6 +27,7 @@ const EVENTS = (() => {
       DOM.overLayDestroyer();
       DOM.arrayPrinter(taskArray.taskStorage);
       DOM.sidebarProjectList(taskArray.filterProjectNames());
+      addListenersToProjectList();
     });
   }
 
@@ -42,14 +43,12 @@ const EVENTS = (() => {
     const allTasksButton = document.querySelector("#allTasksButton");
     allTasksButton.addEventListener("click", () => {
       DOM.arrayPrinter(taskArray.taskStorage);
-      console.log("All tasks button");
     });
   }
   function showDueTodayTasks() {
     const dueTodayButton = document.querySelector("#dueTodayButton");
     dueTodayButton.addEventListener("click", () => {
       DOM.arrayPrinter(taskArray.filterbyDueToday());
-      console.log("Due today button");
     });
   }
 
@@ -57,7 +56,6 @@ const EVENTS = (() => {
     const upcomingButton = document.querySelector("#upcomingButton");
     upcomingButton.addEventListener("click", () => {
       DOM.arrayPrinter(taskArray.filterbyDueThisWeek());
-      console.log("Upcoming tasks button");
     });
   }
 
@@ -65,7 +63,13 @@ const EVENTS = (() => {
     const completedButton = document.querySelector("#completedButton");
     completedButton.addEventListener("click", () => {
       DOM.arrayPrinter(taskArray.filterCompleted());
-      console.log("Completed tasks button");
+    });
+  }
+
+  function addListenersToProjectList() {
+    const projectList = document.querySelector(".projectList");
+    projectList.addEventListener("click", (event) => {
+      DOM.arrayPrinter(taskArray.filterByProject(event.target.id));
     });
   }
 
@@ -75,10 +79,12 @@ const EVENTS = (() => {
     showDueTodayTasks();
     showUpcomingTasks();
     showCompletedTasks();
+    addListenersToProjectList();
   }
 
   return {
     setDefaultViewListeners,
+    addListenersToProjectList,
   };
 })();
 
