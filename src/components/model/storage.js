@@ -21,7 +21,6 @@ const taskArray = {
     // To be only used in conjuction with checkLocalOnLoad() when refreshing /  opening the app
     Object.keys(localStorage).forEach((key) => {
       const storageObject = JSON.parse(localStorage.getItem(key));
-      console.log(storageObject);
       const taskFromStorage = new Task(
         storageObject.name,
         storageObject.project,
@@ -32,7 +31,6 @@ const taskArray = {
       );
       taskArray.taskStorage.push(taskFromStorage);
     });
-    console.log(taskArray.taskStorage);
   },
   checkLocalOnLoad() {
     if (localStorage.length > 0) {
@@ -49,7 +47,6 @@ const taskArray = {
       }
       uniqueProjectNames.sort();
     });
-    console.log(uniqueProjectNames);
     return uniqueProjectNames;
   },
   // Filter functions
@@ -117,6 +114,23 @@ const taskArray = {
     return taskArray.taskStorage.sort((a, b) =>
       a.getDate() > b.getDate() ? 1 : -1
     );
+  },
+
+  // Edit functions
+
+  findByuuid(uuid) {
+    const targetTask = taskArray.taskStorage.findIndex(
+      (Object) => Object.getUuid() === uuid
+    );
+    return targetTask;
+  },
+
+  removeTask(uuid) {
+    const taskToRemove = taskArray.findByuuid(uuid);
+    if (taskToRemove > -1) {
+      taskArray.taskStorage.splice(taskToRemove, 1);
+    }
+    return taskArray.taskStorage;
   },
 };
 
