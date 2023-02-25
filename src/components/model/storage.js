@@ -11,9 +11,8 @@ const taskArray = {
 
   pushToLocal() {
     // To be used each time changes to tasks are made
-    localStorage.clear();
+
     taskArray.taskStorage.forEach((element) => {
-      console.log(element);
       localStorage.setItem(element.uuid, JSON.stringify(element));
     });
   },
@@ -27,7 +26,8 @@ const taskArray = {
         storageObject.priority,
         new Date(`${storageObject.dueDate}`),
         storageObject.info,
-        storageObject.uuid
+        storageObject.uuid,
+        storageObject.isCompleted
       );
       taskArray.taskStorage.push(taskFromStorage);
     });
@@ -87,6 +87,18 @@ const taskArray = {
     );
     return completed;
   },
+  findByuuid(uuid) {
+    const targetTask = taskArray.taskStorage.find(
+      (Object) => Object.getUuid() === uuid
+    );
+    return targetTask;
+  },
+  findIndexByuuid(uuid) {
+    const targetTask = taskArray.taskStorage.findIndex(
+      (Object) => Object.getUuid() === uuid
+    );
+    return targetTask;
+  },
 
   // Sort functions
 
@@ -118,15 +130,8 @@ const taskArray = {
 
   // Edit functions
 
-  findByuuid(uuid) {
-    const targetTask = taskArray.taskStorage.findIndex(
-      (Object) => Object.getUuid() === uuid
-    );
-    return targetTask;
-  },
-
   removeTask(uuid) {
-    const taskToRemove = taskArray.findByuuid(uuid);
+    const taskToRemove = taskArray.findIndexByuuid(uuid);
     if (taskToRemove > -1) {
       taskArray.taskStorage.splice(taskToRemove, 1);
     }

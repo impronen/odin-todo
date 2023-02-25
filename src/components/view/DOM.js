@@ -120,6 +120,7 @@ const DOM = (() => {
     projectArray.forEach((project) => {
       const listItem = document.createElement("li");
       listItem.setAttribute("id", `${project}`);
+      listItem.dataset.project = `${project}`;
       listItem.innerHTML = `${project}`;
       projectList.appendChild(listItem);
     });
@@ -189,12 +190,18 @@ const DOM = (() => {
 
     const editButtonCont = document.createElement("div");
     editButtonCont.classList.add("editButtonCont");
-    editButtonCont.innerHTML = `<span class="material-symbols-rounded">edit_note</span><span class="material-symbols-rounded">delete</span>`;
+    editButtonCont.innerHTML = `<span class="material-symbols-rounded edit">edit_note</span><span class="material-symbols-rounded delete">delete</span>`;
     rightTopSideCont.appendChild(editButtonCont);
 
-    const taskDoneCheckbox = document.createElement("div");
+    const taskDoneCheckbox = document.createElement("input");
+    taskDoneCheckbox.type = "checkbox";
+    taskDoneCheckbox.id = "taskdone";
+    taskDoneCheckbox.name = "taskdone";
+    taskDoneCheckbox.label = "Done";
+    if (task.getCompletion() === true) {
+      taskDoneCheckbox.checked = true;
+    }
     taskDoneCheckbox.classList.add("taskDoneCheckbox");
-    taskDoneCheckbox.innerHTML = `<input type="checkbox" id="taskdone" name="taskdone"><label for="taskdone">Done</label>`;
     rightTopSideCont.appendChild(taskDoneCheckbox);
 
     const rightLowSideCont = document.createElement("div");
@@ -203,6 +210,9 @@ const DOM = (() => {
     cardRightSide.appendChild(rightLowSideCont);
   }
 
+  function removeTaskCard(card) {
+    card.remove();
+  }
   // Form and overlay to add new tasks
 
   function formCreator() {
@@ -287,6 +297,7 @@ const DOM = (() => {
     arrayPrinter,
     overLayDestroyer,
     sidebarProjectList,
+    removeTaskCard,
   };
 })();
 

@@ -22,7 +22,7 @@ class Project {
 }
 
 class Task extends Project {
-  constructor(name, project, priority, dueDate, info, uuid) {
+  constructor(name, project, priority, dueDate, info, uuid, completion) {
     super(project);
     this.name = name;
     this.priority = priority;
@@ -33,6 +33,11 @@ class Task extends Project {
       this.uuid = crypto.randomUUID();
     } else {
       this.uuid = uuid;
+    }
+    if (completion === undefined) {
+      this.isCompleted = false;
+    } else {
+      this.isCompleted = completion;
     }
   }
 
