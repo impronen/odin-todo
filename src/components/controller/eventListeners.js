@@ -78,6 +78,11 @@ const EVENTS = (() => {
       addEditListenersToTaskCards();
     });
   }
+  function addAllCardListeners() {
+    addRemoveListenersToTaskCards();
+    addCompletedEventListenersToTaskCards();
+    addEditListenersToTaskCards();
+  }
   function taskAddingOverlayListener() {
     const addTaskButton = document.querySelector("#addTaskButton");
     addTaskButton.addEventListener("click", () => {
@@ -89,24 +94,28 @@ const EVENTS = (() => {
     const allTasksButton = document.querySelector("#allTasksButton");
     allTasksButton.addEventListener("click", () => {
       DOM.arrayPrinter(storage.taskStorage);
+      addAllCardListeners();
     });
   }
   function showDueTodayTasks() {
     const dueTodayButton = document.querySelector("#dueTodayButton");
     dueTodayButton.addEventListener("click", () => {
       DOM.arrayPrinter(storage.filterbyDueToday());
+      addAllCardListeners();
     });
   }
   function showUpcomingTasks() {
     const upcomingButton = document.querySelector("#upcomingButton");
     upcomingButton.addEventListener("click", () => {
       DOM.arrayPrinter(storage.filterbyDueThisWeek());
+      addAllCardListeners();
     });
   }
   function showCompletedTasks() {
     const completedButton = document.querySelector("#completedButton");
     completedButton.addEventListener("click", () => {
       DOM.arrayPrinter(storage.filterCompleted());
+      addAllCardListeners();
     });
   }
   function setDefaultViewListeners() {
