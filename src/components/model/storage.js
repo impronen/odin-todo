@@ -4,7 +4,7 @@ const dayjs = require("dayjs");
 // import dayjs from 'dayjs' // ES 2015
 dayjs().format();
 
-const taskArray = {
+const storage = {
   taskStorage: [],
 
   // Functions to manage local storage
@@ -12,7 +12,7 @@ const taskArray = {
   pushToLocal() {
     // To be used each time changes to tasks are made
 
-    taskArray.taskStorage.forEach((element) => {
+    storage.taskStorage.forEach((element) => {
       localStorage.setItem(element.uuid, JSON.stringify(element));
     });
   },
@@ -29,17 +29,17 @@ const taskArray = {
         storageObject.uuid,
         storageObject.isCompleted
       );
-      taskArray.taskStorage.push(taskFromStorage);
+      storage.taskStorage.push(taskFromStorage);
     });
   },
   checkLocalOnLoad() {
     if (localStorage.length > 0) {
-      taskArray.pullFromLocal();
+      storage.pullFromLocal();
     }
   },
   // Filters unique project names to an array - used to have project list in sidebar
   filterProjectNames() {
-    const projectNames = taskArray.taskStorage.map((Object) => Object.project);
+    const projectNames = storage.taskStorage.map((Object) => Object.project);
     const uniqueProjectNames = [];
     projectNames.forEach((element) => {
       if (!uniqueProjectNames.includes(element)) {
@@ -52,49 +52,49 @@ const taskArray = {
   // Filter functions
 
   filterByProject(projectToFilter) {
-    const projectTasks = taskArray.taskStorage.filter(
+    const projectTasks = storage.taskStorage.filter(
       (Object) => Object.project === projectToFilter
     );
     return projectTasks;
   },
   filterbyDueToday() {
-    const dueToday = taskArray.taskStorage.filter(
+    const dueToday = storage.taskStorage.filter(
       (Object) => Object.isTheDate() === 0
     );
     return dueToday;
   },
   filterbyDueThisWeek() {
-    const dueThisWeek = taskArray.taskStorage.filter(
+    const dueThisWeek = storage.taskStorage.filter(
       (Object) => Object.isTheWeek() === true
     );
     return dueThisWeek;
   },
   filterbyDueThisMonth() {
-    const dueThisMonth = taskArray.taskStorage.filter(
+    const dueThisMonth = storage.taskStorage.filter(
       (Object) => Object.isTheMonth() === true
     );
     return dueThisMonth;
   },
   filterbyPastDue() {
-    const pastDue = taskArray.taskStorage.filter(
+    const pastDue = storage.taskStorage.filter(
       (Object) => Object.isTheDate() > 0
     );
     return pastDue;
   },
   filterCompleted() {
-    const completed = taskArray.taskStorage.filter(
+    const completed = storage.taskStorage.filter(
       (Object) => Object.getCompletion() === true
     );
     return completed;
   },
   findByuuid(uuid) {
-    const targetTask = taskArray.taskStorage.find(
+    const targetTask = storage.taskStorage.find(
       (Object) => Object.getUuid() === uuid
     );
     return targetTask;
   },
   findIndexByuuid(uuid) {
-    const targetTask = taskArray.taskStorage.findIndex(
+    const targetTask = storage.taskStorage.findIndex(
       (Object) => Object.getUuid() === uuid
     );
     return targetTask;
@@ -104,26 +104,26 @@ const taskArray = {
 
   sortImportance(order) {
     if (order === "descending") {
-      return taskArray.taskStorage.sort((a, b) =>
+      return storage.taskStorage.sort((a, b) =>
         a.convertPriority() > b.convertPriority() ? -1 : 1
       );
     }
-    return taskArray.taskStorage.sort((a, b) =>
+    return storage.taskStorage.sort((a, b) =>
       a.convertPriority() > b.convertPriority() ? 1 : -1
     );
   },
   sortProject() {
-    return taskArray.taskStorage.sort((a, b) =>
+    return storage.taskStorage.sort((a, b) =>
       a.getProject() > b.getProject() ? 1 : -1
     );
   },
   sortByDate(order) {
     if (order === "descending") {
-      return taskArray.taskStorage.sort((a, b) =>
+      return storage.taskStorage.sort((a, b) =>
         a.getDate() > b.getDate() ? -1 : 1
       );
     }
-    return taskArray.taskStorage.sort((a, b) =>
+    return storage.taskStorage.sort((a, b) =>
       a.getDate() > b.getDate() ? 1 : -1
     );
   },
@@ -131,12 +131,12 @@ const taskArray = {
   // Edit functions
 
   removeTask(uuid) {
-    const taskToRemove = taskArray.findIndexByuuid(uuid);
+    const taskToRemove = storage.findIndexByuuid(uuid);
     if (taskToRemove > -1) {
-      taskArray.taskStorage.splice(taskToRemove, 1);
+      storage.taskStorage.splice(taskToRemove, 1);
     }
-    return taskArray.taskStorage;
+    return storage.taskStorage;
   },
 };
 
-export default taskArray;
+export default storage;

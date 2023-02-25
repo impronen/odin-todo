@@ -1,12 +1,12 @@
 import Task from "./taskController";
-import taskArray from "../model/storage";
+import storage from "../model/storage";
 import DOM from "../view/DOM";
 
 const EVENTS = (() => {
   function addListenersToProjectList() {
     const projectList = document.querySelector(".projectList");
     projectList.addEventListener("click", (event) => {
-      DOM.arrayPrinter(taskArray.filterByProject(event.target.id));
+      DOM.arrayPrinter(storage.filterByProject(event.target.id));
     });
   }
 
@@ -16,13 +16,13 @@ const EVENTS = (() => {
       element.addEventListener("click", (event) => {
         const parent = event.target.closest(".taskCard");
         console.log(parent.dataset.uuid);
-        taskArray.removeTask(parent.dataset.uuid);
+        storage.removeTask(parent.dataset.uuid);
 
         localStorage.clear();
         console.log(localStorage);
-        taskArray.pushToLocal();
+        storage.pushToLocal();
         console.log(localStorage);
-        DOM.sidebarProjectList(taskArray.filterProjectNames());
+        DOM.sidebarProjectList(storage.filterProjectNames());
         parent.remove();
       })
     );
@@ -42,9 +42,9 @@ const EVENTS = (() => {
     completeCheckBox.forEach((element) => {
       const parent = element.closest(".taskCard");
       element.addEventListener("change", () => {
-        const targetTask = taskArray.findByuuid(parent.dataset.uuid);
+        const targetTask = storage.findByuuid(parent.dataset.uuid);
         targetTask.changeCompletion();
-        taskArray.pushToLocal();
+        storage.pushToLocal();
       });
     });
   }
@@ -66,12 +66,12 @@ const EVENTS = (() => {
         new Date(`${date}T00:00`),
         info
       );
-      taskArray.taskStorage.push(newTask1);
-      taskArray.pushToLocal();
+      storage.taskStorage.push(newTask1);
+      storage.pushToLocal();
       newTask1.isTheDate();
       DOM.overLayDestroyer();
-      DOM.arrayPrinter(taskArray.taskStorage);
-      DOM.sidebarProjectList(taskArray.filterProjectNames());
+      DOM.arrayPrinter(storage.taskStorage);
+      DOM.sidebarProjectList(storage.filterProjectNames());
       addListenersToProjectList();
       addRemoveListenersToTaskCards();
       addCompletedEventListenersToTaskCards();
@@ -88,25 +88,25 @@ const EVENTS = (() => {
   function showAllTasks() {
     const allTasksButton = document.querySelector("#allTasksButton");
     allTasksButton.addEventListener("click", () => {
-      DOM.arrayPrinter(taskArray.taskStorage);
+      DOM.arrayPrinter(storage.taskStorage);
     });
   }
   function showDueTodayTasks() {
     const dueTodayButton = document.querySelector("#dueTodayButton");
     dueTodayButton.addEventListener("click", () => {
-      DOM.arrayPrinter(taskArray.filterbyDueToday());
+      DOM.arrayPrinter(storage.filterbyDueToday());
     });
   }
   function showUpcomingTasks() {
     const upcomingButton = document.querySelector("#upcomingButton");
     upcomingButton.addEventListener("click", () => {
-      DOM.arrayPrinter(taskArray.filterbyDueThisWeek());
+      DOM.arrayPrinter(storage.filterbyDueThisWeek());
     });
   }
   function showCompletedTasks() {
     const completedButton = document.querySelector("#completedButton");
     completedButton.addEventListener("click", () => {
-      DOM.arrayPrinter(taskArray.filterCompleted());
+      DOM.arrayPrinter(storage.filterCompleted());
     });
   }
   function setDefaultViewListeners() {
