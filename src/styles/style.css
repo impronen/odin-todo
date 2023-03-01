@@ -6,6 +6,7 @@
   --lighter-accent-color: #52c7ec;
   --special-accent-color: #9fa6dc;
   --orange-accent-color: #ff861c;
+  --line-color: #36556b;
 
   --text-light: #c3e5f0;
   --text-dark: #09324b;
@@ -39,6 +40,11 @@ li {
 
 li:hover {
   color: var(--text-dark2);
+}
+
+label {
+  display: inline-block;
+  width: min-content;
 }
 
 .header {
@@ -81,14 +87,15 @@ li:hover {
   border-style: solid;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.432);
   transition: box-shadow 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
 }
 
 .buttonstyle1:is(:hover) {
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.432);
 }
 
-.buttonstyle1:is(:focus) {
-  box-shadow: inset 2px 2px 6px #202020;
+.buttonstyle1:is(:active) {
+  transform: scale(1.1);
 }
 
 .buttonstyle2 {
@@ -105,10 +112,15 @@ li:hover {
   width: 100%;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 }
 
 .buttonstyle2:hover {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.buttonstyle2:active {
+  transform: scale(1.1);
 }
 
 .main {
@@ -151,7 +163,7 @@ li:hover {
   left: -5px;
   height: 1px;
   bottom: -5px;
-  background-color: #36556b;
+  background-color: var(--line-color);
 }
 
 .sidebar::after {
@@ -160,7 +172,7 @@ li:hover {
   height: 80vh;
   width: 1px;
   right: -2px;
-  background-color: #36556b;
+  background-color: var(--line-color);
 }
 
 .display {
@@ -173,12 +185,23 @@ li:hover {
 .TaskFilterMenu {
   width: 100%;
   height: 10%;
+  position: relative;
+}
+
+.TaskFilterMenu:after {
+  content: "";
+  position: absolute;
+  width: 70%;
+  left: 15%;
+  height: 1px;
+  bottom: 5px;
+  background-color: var(--line-color);
 }
 
 .taskDisplay {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
+  padding-left: 5%;
 }
 
 .inputOverlay {

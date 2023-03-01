@@ -1,12 +1,28 @@
+:root {
+  --blue-bg-color: #7ac1d7;
+  --green-bg-color: #cbdab7;
+
+  --darker-accent-color: #1b98e4;
+  --lighter-accent-color: #52c7ec;
+  --special-accent-color: #9fa6dc;
+  --orange-accent-color: #ff861c;
+  --line-color: #36556b;
+
+  --text-light: #c3e5f0;
+  --text-dark: #09324b;
+  --text-dark2: #0c6196;
+  --text: var(--_text-light);
+}
+
 .taskCard {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 50px;
-  width: 250px;
   margin: 20px;
-  border-style: groove;
+  background-color: var(--green-bg-color);
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.432);
 }
 
 .cardLeftSide,
@@ -14,26 +30,41 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding: 10%;
 }
 
 .cardLeftSide {
   align-items: center;
   height: 100%;
-  width: 40%;
+  width: 50%;
 }
 
 .cardRightSide {
   height: 100%;
-  width: 60%;
+  width: 50%;
 }
 
 .rightTopSideCont {
   display: flex;
-  flex-direction: row;
   justify-content: space-around;
 }
 
 .rightLowSideCont {
   display: flex;
   justify-content: center;
+}
+
+.editButtonCont {
+  display: flex;
+}
+
+.editButtonCont,
+.material-symbols-rounded {
+  cursor: default;
+  transform: scale(0.9);
+  transition: transform 0.1s ease-in-out;
+}
+
+.material-symbols-rounded:hover {
+  transform: scale(1.1);
 }
