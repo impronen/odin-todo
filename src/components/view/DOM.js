@@ -166,48 +166,53 @@ const DOM = (() => {
     taskCard.dataset.uuid = task.getUuid();
     taskDisplay.appendChild(taskCard);
 
-    const cardLeftSide = document.createElement("div");
-    cardLeftSide.classList.add("cardLeftSide");
-    taskCard.appendChild(cardLeftSide);
+    // Column 1
+    const cardCol1 = document.createElement("div");
+    cardCol1.classList.add("cardCol1");
+    taskCard.appendChild(cardCol1);
 
     const taskName = document.createElement("div");
     taskName.classList.add("taskName");
     taskName.innerHTML = task.getName();
-    cardLeftSide.appendChild(taskName);
+    cardCol1.appendChild(taskName);
+
+    const dueDate = document.createElement("div");
+    dueDate.classList.add("dueDate");
+    dueDate.innerText = task.getDate();
+    cardCol1.appendChild(dueDate);
+
+    // Column 2
+    const cardCol2 = document.createElement("div");
+    cardCol2.classList.add("cardCol2");
+    taskCard.appendChild(cardCol2);
 
     const projectName = document.createElement("div");
     projectName.classList.add("projectName");
     projectName.innerHTML = task.getProject();
-    cardLeftSide.appendChild(projectName);
+    cardCol2.appendChild(projectName);
 
-    const cardRightSide = document.createElement("div");
-    cardRightSide.classList.add("cardRightSide");
-    taskCard.appendChild(cardRightSide);
+    const daysLeft = document.createElement("div");
+    daysLeft.classList.add("daysLeft");
+    daysLeft.innerHTML = `${task.isTheDate()} left`;
+    cardCol2.appendChild(daysLeft);
 
-    const rightTopSideCont = document.createElement("div");
-    rightTopSideCont.classList.add("rightTopSideCont");
-    cardRightSide.appendChild(rightTopSideCont);
+    // Column 3
+    const cardCol3 = document.createElement("div");
+    cardCol3.classList.add("cardCol3");
+    taskCard.appendChild(cardCol3);
+
+    const taskDoneBtn = document.createElement("button");
+    taskDoneBtn.classList.add("taskDoneBtn");
+    if (task.getCompletion() === true) {
+      taskDoneBtn.classList.add("completedBtn");
+    }
+    taskDoneBtn.innerText = "Done";
+    cardCol3.appendChild(taskDoneBtn);
 
     const editButtonCont = document.createElement("div");
     editButtonCont.classList.add("editButtonCont");
     editButtonCont.innerHTML = `<span class="material-symbols-rounded edit">edit_note</span><span class="material-symbols-rounded delete">delete</span>`;
-    rightTopSideCont.appendChild(editButtonCont);
-
-    const taskDoneCheckbox = document.createElement("input");
-    taskDoneCheckbox.type = "checkbox";
-    taskDoneCheckbox.id = "taskdone";
-    taskDoneCheckbox.name = "taskdone";
-    taskDoneCheckbox.label = "Done";
-    if (task.getCompletion() === true) {
-      taskDoneCheckbox.checked = true;
-    }
-    taskDoneCheckbox.classList.add("taskDoneCheckbox");
-    rightTopSideCont.appendChild(taskDoneCheckbox);
-
-    const rightLowSideCont = document.createElement("div");
-    rightLowSideCont.classList.add("rightLowSideCont");
-    rightLowSideCont.innerHTML = `Due in ${task.isTheDate()} days`;
-    cardRightSide.appendChild(rightLowSideCont);
+    cardCol3.appendChild(editButtonCont);
   }
 
   function removeTaskCard(card) {

@@ -95,7 +95,7 @@ label {
 }
 
 .buttonstyle1:is(:active) {
-  transform: scale(1.1);
+  transform: scale(0.9);
 }
 
 .buttonstyle2 {
@@ -120,7 +120,7 @@ label {
 }
 
 .buttonstyle2:active {
-  transform: scale(1.1);
+  transform: scale(0.9);
 }
 
 .main {

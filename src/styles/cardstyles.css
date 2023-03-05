@@ -16,46 +16,38 @@
 
 .taskCard {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin: 20px;
+  flex-direction: column;
+  width: 100%;
+  max-width: 250px;
+  padding: 10px;
+  margin: 10px;
   background-color: var(--green-bg-color);
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.432);
 }
 
-.cardLeftSide,
-.cardRightSide {
+.cardCol1,
+.cardCol2,
+.cardCol3 {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 10%;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.cardLeftSide {
-  align-items: center;
-  height: 100%;
-  width: 50%;
+.cardCol1 {
 }
 
-.cardRightSide {
-  height: 100%;
-  width: 50%;
+.cardCol2 {
+  padding-top: 2%;
 }
 
-.rightTopSideCont {
+.cardCol3 {
+  padding-top: 7%;
+}
+
+.taskName {
   display: flex;
-  justify-content: space-around;
-}
-
-.rightLowSideCont {
-  display: flex;
-  justify-content: center;
-}
-
-.editButtonCont {
-  display: flex;
+  justify-content: space-between;
 }
 
 .editButtonCont,

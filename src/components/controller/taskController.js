@@ -93,7 +93,6 @@ class Task extends Project {
     const { dueDate } = this;
     const difference = dueDate.getTime() - today;
     const days = Math.ceil(difference / (1000 * 3600 * 24));
-    console.log(`Task is due in ${days} days.`);
     return days;
   }
 
