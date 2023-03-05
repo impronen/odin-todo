@@ -36,15 +36,30 @@ const EVENTS = (() => {
     );
   }
   function addCompletedEventListenersToTaskCards() {
-    const completeCheckBox = document.querySelectorAll(
-      "input[type=checkbox][name=taskdone]"
-    );
-    completeCheckBox.forEach((element) => {
+    const completeButton = document.querySelectorAll(".taskDoneBtn");
+    completeButton.forEach((element) => {
       const parent = element.closest(".taskCard");
-      element.addEventListener("change", () => {
+      const daysLeft = parent.querySelector(".daysLeft");
+      element.addEventListener("click", () => {
         const targetTask = storage.findByuuid(parent.dataset.uuid);
+        console.log(targetTask.getCompletion());
         targetTask.changeCompletion();
+        console.log(targetTask.getCompletion());
+        if (targetTask.getCompletion() === true) {
+          daysLeft.innerHTML = "Completed";
+          daysLeft.classList.add("completed");
+          element.classList.add("completedBtn");
+          // eslint-disable-next-line no-param-reassign
+          element.innerHTML = "Task Done";
+        } else {
+          daysLeft.innerHTML = targetTask.howManyDays();
+          daysLeft.classList.remove("completed");
+          element.classList.remove("completedBtn");
+          // eslint-disable-next-line no-param-reassign
+          element.innerHTML = "Mark Completed";
+        }
         storage.pushToLocal();
+        console.log(localStorage);
       });
     });
   }

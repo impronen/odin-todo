@@ -193,7 +193,12 @@ const DOM = (() => {
 
     const daysLeft = document.createElement("div");
     daysLeft.classList.add("daysLeft");
-    daysLeft.innerHTML = `${task.isTheDate()} left`;
+    if (task.getCompletion() === true) {
+      daysLeft.innerHTML = "Completed";
+      daysLeft.classList.add(".completed");
+    } else {
+      daysLeft.innerHTML = task.howManyDays();
+    }
     cardCol2.appendChild(daysLeft);
 
     // Column 3
@@ -204,9 +209,12 @@ const DOM = (() => {
     const taskDoneBtn = document.createElement("button");
     taskDoneBtn.classList.add("taskDoneBtn");
     if (task.getCompletion() === true) {
+      taskDoneBtn.innerHTML = "Task Done";
       taskDoneBtn.classList.add("completedBtn");
+    } else {
+      taskDoneBtn.innerHTML = "Mark Completed";
     }
-    taskDoneBtn.innerText = "Done";
+
     cardCol3.appendChild(taskDoneBtn);
 
     const editButtonCont = document.createElement("div");

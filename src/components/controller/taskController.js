@@ -106,6 +106,17 @@ class Task extends Project {
     return month;
   }
 
+  howManyDays() {
+    const dayCount = this.isTheDate();
+    if (dayCount < 0) {
+      return `I'm overdue :(`;
+    }
+    if (dayCount === 0) {
+      return `Due today!`;
+    }
+    return `${this.isTheDate()} days left`;
+  }
+
   convertPriority() {
     const i = this.priority; // High, Normal, Low
     if (i === "High") {
