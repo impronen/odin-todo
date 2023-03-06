@@ -1,3 +1,13 @@
+6/3/2023
+
+Next to implement:
+change completed from sidebar to overdue 
+Add filter based on importance &  ascending/descending to taskview top panel
+This would contain a signifyer of what list you are looking, based on selection 
+from sidebar - when filters are applied, that will first be used as a basis for
+tasks to be fed to selected sorting / filtering functions
+
+
 12/2/2023
 
 Use of local storage.

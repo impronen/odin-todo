@@ -9,7 +9,6 @@ const EVENTS = (() => {
       DOM.arrayPrinter(storage.filterByProject(event.target.id));
     });
   }
-
   function addRemoveListenersToTaskCards() {
     const deleteIcons = document.querySelectorAll(".delete");
     deleteIcons.forEach((element) =>
@@ -28,11 +27,7 @@ const EVENTS = (() => {
   }
   function addEditListenersToTaskCards() {
     const editIcons = document.querySelectorAll(".edit");
-    editIcons.forEach((element) =>
-      element.addEventListener("click", () => {
-        console.log("edit buttons are being pressed");
-      })
-    );
+    editIcons.forEach((element) => element.addEventListener("click", () => {}));
   }
   function addCompletedEventListenersToTaskCards() {
     const completeButton = document.querySelectorAll(".taskDoneBtn");
@@ -41,9 +36,7 @@ const EVENTS = (() => {
       const daysLeft = parent.querySelector(".daysLeft");
       element.addEventListener("click", () => {
         const targetTask = storage.findByuuid(parent.dataset.uuid);
-        console.log(targetTask.getCompletion());
         targetTask.changeCompletion();
-        console.log(targetTask.getCompletion());
         if (targetTask.getCompletion() === true) {
           daysLeft.innerHTML = "Completed";
           daysLeft.classList.add("completed");
@@ -58,7 +51,6 @@ const EVENTS = (() => {
           element.innerHTML = "Mark Completed";
         }
         storage.pushToLocal();
-        console.log(localStorage);
       });
     });
   }
@@ -132,7 +124,7 @@ const EVENTS = (() => {
       addAllCardListeners();
     });
   }
-  function setDefaultViewListeners() {
+  function setDefaultListeners() {
     taskAddingOverlayListener();
     showAllTasks();
     showDueTodayTasks();
@@ -144,7 +136,7 @@ const EVENTS = (() => {
     addCompletedEventListenersToTaskCards();
   }
   return {
-    setDefaultViewListeners,
+    setDefaultListeners,
     addListenersToProjectList,
     addRemoveListenersToTaskCards,
     addEditListenersToTaskCards,

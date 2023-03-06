@@ -141,6 +141,95 @@ const DOM = (() => {
     const TaskFilterMenu = document.createElement("div");
     TaskFilterMenu.classList.add("TaskFilterMenu");
     display.appendChild(TaskFilterMenu);
+
+    const currentView = document.createElement("h2");
+    currentView.classList.add("currentView");
+    currentView.innerText = "All Tasks";
+    TaskFilterMenu.appendChild(currentView);
+
+    const priorityFilterSelector = document.createElement("div");
+    priorityFilterSelector.classList.add("priorityFilterSelector");
+    TaskFilterMenu.appendChild(priorityFilterSelector);
+
+    const priorityLabel = document.createElement("lable");
+    priorityLabel.setAttribute("for", "priority");
+    priorityLabel.textContent = "Set a priority filter:";
+
+    const priority = document.createElement("select");
+    priority.setAttribute("name", "priority");
+    priority.setAttribute("id", "priority");
+    const all = document.createElement("OPTION");
+    all.setAttribute("value", "All");
+    const allText = document.createTextNode("All");
+    all.appendChild(allText);
+    const high = document.createElement("OPTION");
+    high.setAttribute("value", "High");
+    const highText = document.createTextNode("High");
+    high.appendChild(highText);
+    const normal = document.createElement("OPTION");
+    normal.setAttribute("value", "Normal");
+    const normalText = document.createTextNode("Normal");
+    normal.appendChild(normalText);
+    const low = document.createElement("OPTION");
+    low.setAttribute("value", "Low");
+    const lowText = document.createTextNode("Low");
+    low.appendChild(lowText);
+
+    priorityFilterSelector.appendChild(priorityLabel);
+    priority.appendChild(all);
+    priority.appendChild(high);
+    priority.appendChild(normal);
+    priority.appendChild(low);
+    priorityFilterSelector.appendChild(priority);
+
+    const orderFilterSelector = document.createElement("div");
+    orderFilterSelector.classList.add("orderFilterSelector");
+    TaskFilterMenu.appendChild(orderFilterSelector);
+
+    const orderLabel = document.createElement("lable");
+    orderLabel.setAttribute("for", "order");
+    orderLabel.textContent = "Order by due date:";
+    orderFilterSelector.appendChild(orderLabel);
+
+    const order = document.createElement("select");
+    order.setAttribute("name", "order");
+    order.setAttribute("id", "order");
+
+    const descending = document.createElement("OPTION");
+    descending.setAttribute("value", "descending");
+    const descendingText = document.createTextNode("Descending");
+    descending.appendChild(descendingText);
+    order.appendChild(descending);
+
+    const ascending = document.createElement("OPTION");
+    ascending.setAttribute("value", "ascending");
+    const ascendingText = document.createTextNode("Ascending");
+    ascending.appendChild(ascendingText);
+    order.appendChild(ascending);
+    orderFilterSelector.appendChild(order);
+
+    const showCompletedSelector = document.createElement("div");
+    showCompletedSelector.classList.add("showCompletedSelector");
+    TaskFilterMenu.appendChild(showCompletedSelector);
+
+    const showCompletedLabel = document.createElement("lable");
+    showCompletedLabel.setAttribute("for", "showCompleted");
+    showCompletedLabel.textContent = "Show completed tasks";
+    showCompletedSelector.appendChild(showCompletedLabel);
+
+    const showCompleted = document.createElement("input");
+    showCompleted.type = "checkbox";
+    showCompleted.id = "showCompleted";
+    showCompleted.name = "showCompleted";
+    showCompleted.checked = true;
+    showCompleted.classList.add("showCompleted");
+    showCompletedSelector.appendChild(showCompleted);
+
+    const applyFiltersButton = document.createElement("button");
+    applyFiltersButton.classList.add("applyFiltersButton");
+    applyFiltersButton.classList.add("buttonstyle3");
+    applyFiltersButton.innerText = "Apply filters";
+    TaskFilterMenu.appendChild(applyFiltersButton);
   }
 
   function createTaskDisplay() {

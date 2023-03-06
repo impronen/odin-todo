@@ -11,4 +11,4 @@ storage.checkLocalOnLoad();
 
 DOM.arrayPrinter(storage.taskStorage);
 DOM.sidebarProjectList(storage.filterProjectNames());
-EVENTS.setDefaultViewListeners();
+EVENTS.setDefaultListeners();

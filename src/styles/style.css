@@ -18,6 +18,7 @@ body {
   font-family: roboto, -apple-system, BlinkMacSystemFont, "Open Sans",
     "Helvetica Neue", sans-serif;
   margin: 0;
+  color: var(--text-dark);
 }
 
 ul {
@@ -28,7 +29,6 @@ ul {
 }
 
 li {
-  color: var(--text-dark);
   cursor: default;
   font-size: 18px;
   font-weight: bold;
@@ -54,7 +54,6 @@ label {
   align-items: center;
   height: 10vh;
   background-color: var(--green-bg-color);
-  color: var(--text-dark);
 }
 
 .material-symbols-outlined {
@@ -98,7 +97,8 @@ label {
   transform: scale(0.9);
 }
 
-.buttonstyle2 {
+.buttonstyle2,
+.buttonstyle3 {
   display: flex;
   flex-wrap: wrap;
   background-color: var(--green-bg-color);
@@ -109,17 +109,22 @@ label {
   padding: 10px;
   margin: 5px;
   margin-bottom: 10px;
-  width: 100%;
+
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-  transition: box-shadow 0.2s ease-in-out;
   transition: transform 0.2s ease-in-out;
 }
 
-.buttonstyle2:hover {
+.buttonstyle2 {
+  width: 100%;
+}
+
+.buttonstyle2:hover,
+.buttonstyle3:hover {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.buttonstyle2:active {
+.buttonstyle2:active,
+.buttonstyle3:active {
   transform: scale(0.9);
 }
 
@@ -140,7 +145,6 @@ label {
   padding-right: 2%;
   background-color: var(--blue-bg-color);
   position: relative;
-  color: var(--text-dark);
 }
 
 .sideButtonContainer,
@@ -186,6 +190,9 @@ label {
   width: 100%;
   height: 10%;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .TaskFilterMenu:after {
