@@ -285,13 +285,24 @@ const DOM = (() => {
   function formCreator() {
     const overlay = document.querySelector("#inputOverlay");
 
+    const topRow = document.createElement("div");
+    topRow.classList.add("topRow");
+    overlay.appendChild(topRow);
+
+    const heading = document.createElement("h4");
+    heading.textContent = "New Task";
+    topRow.appendChild(heading);
+
+    const closebutton = document.createElement("div");
+    closebutton.classList.add("closebutton");
+    closebutton.innerHTML = `<span class="material-symbols-outlined">
+    close
+    </span>`;
+    topRow.appendChild(closebutton);
+
     const form = document.createElement("form");
     form.classList.add("taskForm");
     form.setAttribute("method", "post");
-
-    const legend = document.createElement("legend");
-    legend.textContent = "New Task";
-    form.appendChild(legend);
 
     const taskName = document.createElement("input");
     taskName.setAttribute("type", "text");
@@ -329,8 +340,6 @@ const DOM = (() => {
     const info = document.createElement("input");
     info.setAttribute("type", "textarea");
     info.setAttribute("name", "info");
-    info.setAttribute("rows", "5");
-    info.setAttribute("cols", "30");
     info.setAttribute("placeholder", "Notes");
 
     form.appendChild(taskName);
@@ -342,7 +351,7 @@ const DOM = (() => {
     overlay.appendChild(form);
 
     const addToTaskList = document.createElement("button");
-    addToTaskList.innerHTML = "Add task to list";
+    addToTaskList.innerHTML = "Add Task";
     addToTaskList.setAttribute("id", "addToTaskList");
     addToTaskList.classList.add("buttonstyle1");
 

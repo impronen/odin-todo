@@ -55,10 +55,16 @@ const EVENTS = (() => {
       });
     });
   }
+  function closeOverLayLister() {
+    const lilX = document.querySelector(".closebutton");
+    lilX.addEventListener("click", () => {
+      DOM.overLayDestroyer();
+    });
+  }
   function addToTaskListListener() {
-    const buttonListener2 = document.querySelector("#addToTaskList");
+    const addNewTask = document.querySelector("#addToTaskList");
 
-    buttonListener2.addEventListener("click", () => {
+    addNewTask.addEventListener("click", () => {
       const form = document.querySelector("#inputOverlay");
       const name = form.querySelector('input[name="taskName"]').value;
       const project = form.querySelector('input[name="projectName"]').value;
@@ -95,6 +101,7 @@ const EVENTS = (() => {
     addTaskButton.addEventListener("click", () => {
       DOM.overLayRendered();
       addToTaskListListener();
+      closeOverLayLister();
     });
   }
   function showAllTasks() {

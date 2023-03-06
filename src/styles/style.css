@@ -52,6 +52,11 @@ p {
   margin-left: 5px;
 }
 
+legend {
+  padding: 7px;
+  margin: 5px;
+}
+
 .header {
   display: flex;
   flex-direction: row;
@@ -209,8 +214,8 @@ p {
 .TaskFilterMenu:after {
   content: "";
   position: absolute;
-  width: 70%;
-  left: 15%;
+  width: 80%;
+  left: 10%;
   height: 1px;
   bottom: 5px;
   background-color: var(--line-color);
@@ -232,6 +237,7 @@ p {
   display: flex;
   flex-wrap: wrap;
   padding-left: 5%;
+  padding-top: 2%;
 }
 
 .inputOverlay {
@@ -251,17 +257,34 @@ p {
   margin-top: 10%;
 }
 
+.topRow {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  padding-left: 15%;
+  width: 100%;
+  justify-items: center;
+}
+
+.closebutton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: default;
+  transform: scale(0.9);
+  transition: transform 0.1s ease-in-out;
+}
+
+.closebutton:hover {
+  transform: scale(1.05);
+}
+
 .taskForm {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
   flex-wrap: wrap;
   color: var(--text-dark);
-}
-
-legend {
-  padding: 7px;
-  margin: 5px;
 }
 
 .taskForm input[type="text"] {
@@ -298,4 +321,8 @@ legend {
   padding: 7px;
   margin: 5px;
   font-size: 14px;
+  overflow: hidden;
+  max-height: 100px;
+  resize: none;
+  word-break: break-all;
 }
