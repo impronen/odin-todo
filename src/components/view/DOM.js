@@ -178,8 +178,19 @@ const DOM = (() => {
 
     const dueDate = document.createElement("div");
     dueDate.classList.add("dueDate");
-    dueDate.innerText = task.getDate();
+    dueDate.innerHTML = ` ${task.getDate()}`;
     cardCol1.appendChild(dueDate);
+
+    const priorityIndicator = document.createElement("div");
+    priorityIndicator.classList.add("priorityIndicator");
+    if (task.getPriority() === "High") {
+      priorityIndicator.classList.add("High");
+    } else if (task.getPriority() === "Normal") {
+      priorityIndicator.classList.add("Normal");
+    } else {
+      priorityIndicator.classList.add("Low");
+    }
+    dueDate.appendChild(priorityIndicator);
 
     // Column 2
     const cardCol2 = document.createElement("div");
@@ -214,7 +225,6 @@ const DOM = (() => {
     } else {
       taskDoneBtn.innerHTML = "Mark Completed";
     }
-
     cardCol3.appendChild(taskDoneBtn);
 
     const editButtonCont = document.createElement("div");
@@ -244,12 +254,24 @@ const DOM = (() => {
     projectName.setAttribute("name", "projectName");
     projectName.setAttribute("placeholder", "Project");
 
-    const priority = document.createElement("input");
-    priority.setAttribute("type", "select");
+    const priority = document.createElement("select");
     priority.setAttribute("name", "priority");
-    priority.setAttribute("value", "High");
-    priority.setAttribute("value", "Normal");
-    priority.setAttribute("value", "Low");
+    const high = document.createElement("OPTION");
+    high.setAttribute("value", "High");
+    const highText = document.createTextNode("High");
+    high.appendChild(highText);
+    const normal = document.createElement("OPTION");
+    normal.setAttribute("value", "Normal");
+    const normalText = document.createTextNode("Normal");
+    normal.appendChild(normalText);
+    const low = document.createElement("OPTION");
+    low.setAttribute("value", "Low");
+    const lowText = document.createTextNode("Low");
+    low.appendChild(lowText);
+
+    priority.appendChild(normal);
+    priority.appendChild(high);
+    priority.appendChild(low);
 
     const dueDate = document.createElement("input");
     dueDate.setAttribute("type", "date");

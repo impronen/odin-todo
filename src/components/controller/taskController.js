@@ -63,6 +63,10 @@ class Task extends Project {
     return this.uuid;
   }
 
+  getPriority() {
+    return this.priority;
+  }
+
   // Changers
   changeName(x) {
     return (this.name = x);

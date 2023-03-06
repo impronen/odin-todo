@@ -15,15 +15,14 @@ const EVENTS = (() => {
     deleteIcons.forEach((element) =>
       element.addEventListener("click", (event) => {
         const parent = event.target.closest(".taskCard");
-        console.log(parent.dataset.uuid);
         storage.removeTask(parent.dataset.uuid);
-
         localStorage.clear();
-        console.log(localStorage);
         storage.pushToLocal();
-        console.log(localStorage);
         DOM.sidebarProjectList(storage.filterProjectNames());
-        parent.remove();
+        parent.classList.add("removedCard");
+        parent.addEventListener("transitionend", () => {
+          parent.remove();
+        });
       })
     );
   }
@@ -70,7 +69,7 @@ const EVENTS = (() => {
       const form = document.querySelector("#inputOverlay");
       const name = form.querySelector('input[name="taskName"]').value;
       const project = form.querySelector('input[name="projectName"]').value;
-      const priority = form.querySelector('input[name="priority"]').value;
+      const priority = form.querySelector('select[name="priority"]').value;
       const date = form.querySelector('input[id="selectedDate"]').value;
       const info = form.querySelector('input[name="info"]').value;
 

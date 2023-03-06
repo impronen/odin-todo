@@ -9,6 +9,10 @@
   --orange-accent-color: #ff861c;
   --line-color: #36556b;
 
+  --priority-high: #ee1c00;
+  --priority-normal: #eec200;
+  --priority-low: #81b800;
+
   --text-light: #c3e5f0;
   --text-dark: #09324b;
   --text-dark2: #0c6196;
@@ -27,6 +31,11 @@
   background-color: var(--green-bg-color);
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.432);
+  transition: transform 0.3s 0s;
+}
+
+.removedCard {
+  transform: scale(0);
 }
 
 .cardCol1,
@@ -71,15 +80,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 120px;
+  width: 130px;
   border-width: 0px;
   border-radius: 2px;
   padding: 10px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.432);
-  transition: box-shadow 0.2s ease-in-out;
-  transition: transform 0.2s ease-in-out;
   background-color: var(--orange-accent-color);
   color: var(--text-dark);
+  font-weight: bold;
+  transition: box-shadow 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+  transition: background-color 0.1s ease-out;
 }
 
 .taskDoneBtn:is(:hover) {
@@ -92,7 +103,24 @@
 
 .completedBtn {
   background-color: var(--completed-color);
-  color: var(--text-dark);
+}
+
+.priorityIndicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border-width: 10px;
+  margin-left: 5px;
+  background-color: var(--priority-normal);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.432);
+}
+
+.High {
+  background-color: var(--priority-high);
+}
+
+.Low {
+  background-color: var(--priority-low);
 }
 
 .editButtonCont {
