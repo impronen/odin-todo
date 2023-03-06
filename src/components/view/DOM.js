@@ -1,4 +1,5 @@
 import "material-symbols";
+/* import storage from "../model/storage"; */
 
 const DOM = (() => {
   const content = document.querySelector(".content");
@@ -147,89 +148,43 @@ const DOM = (() => {
     currentView.innerText = "All Tasks";
     TaskFilterMenu.appendChild(currentView);
 
-    const priorityFilterSelector = document.createElement("div");
-    priorityFilterSelector.classList.add("priorityFilterSelector");
-    TaskFilterMenu.appendChild(priorityFilterSelector);
+    const priorityLegend = document.createElement("div");
+    priorityLegend.classList.add("priorityFilterSelector");
+    TaskFilterMenu.appendChild(priorityLegend);
 
-    const priorityLabel = document.createElement("lable");
-    priorityLabel.setAttribute("for", "priority");
-    priorityLabel.textContent = "Set a priority filter:";
+    const priorityHigh = document.createElement("div");
+    priorityHigh.classList.add("indicators");
+    priorityLegend.appendChild(priorityHigh);
+    const priorityIndicatorHigh = document.createElement("div");
+    priorityIndicatorHigh.classList.add("priorityIndicator");
+    priorityIndicatorHigh.classList.add("High");
+    const text1 = document.createElement("p");
+    text1.textContent = "High importance";
+    priorityHigh.appendChild(priorityIndicatorHigh);
+    priorityHigh.appendChild(text1);
 
-    const priority = document.createElement("select");
-    priority.setAttribute("name", "priority");
-    priority.setAttribute("id", "priority");
-    const all = document.createElement("OPTION");
-    all.setAttribute("value", "All");
-    const allText = document.createTextNode("All");
-    all.appendChild(allText);
-    const high = document.createElement("OPTION");
-    high.setAttribute("value", "High");
-    const highText = document.createTextNode("High");
-    high.appendChild(highText);
-    const normal = document.createElement("OPTION");
-    normal.setAttribute("value", "Normal");
-    const normalText = document.createTextNode("Normal");
-    normal.appendChild(normalText);
-    const low = document.createElement("OPTION");
-    low.setAttribute("value", "Low");
-    const lowText = document.createTextNode("Low");
-    low.appendChild(lowText);
+    const priorityNormal = document.createElement("div");
+    priorityNormal.classList.add("indicators");
+    priorityLegend.appendChild(priorityNormal);
 
-    priorityFilterSelector.appendChild(priorityLabel);
-    priority.appendChild(all);
-    priority.appendChild(high);
-    priority.appendChild(normal);
-    priority.appendChild(low);
-    priorityFilterSelector.appendChild(priority);
+    const priorityIndicatorNormal = document.createElement("div");
+    priorityIndicatorNormal.classList.add("priorityIndicator");
+    priorityIndicatorNormal.classList.add("Normal");
+    const text2 = document.createElement("p");
+    text2.textContent = "Normal importance";
+    priorityNormal.appendChild(priorityIndicatorNormal);
+    priorityNormal.appendChild(text2);
 
-    const orderFilterSelector = document.createElement("div");
-    orderFilterSelector.classList.add("orderFilterSelector");
-    TaskFilterMenu.appendChild(orderFilterSelector);
-
-    const orderLabel = document.createElement("lable");
-    orderLabel.setAttribute("for", "order");
-    orderLabel.textContent = "Order by due date:";
-    orderFilterSelector.appendChild(orderLabel);
-
-    const order = document.createElement("select");
-    order.setAttribute("name", "order");
-    order.setAttribute("id", "order");
-
-    const descending = document.createElement("OPTION");
-    descending.setAttribute("value", "descending");
-    const descendingText = document.createTextNode("Descending");
-    descending.appendChild(descendingText);
-    order.appendChild(descending);
-
-    const ascending = document.createElement("OPTION");
-    ascending.setAttribute("value", "ascending");
-    const ascendingText = document.createTextNode("Ascending");
-    ascending.appendChild(ascendingText);
-    order.appendChild(ascending);
-    orderFilterSelector.appendChild(order);
-
-    const showCompletedSelector = document.createElement("div");
-    showCompletedSelector.classList.add("showCompletedSelector");
-    TaskFilterMenu.appendChild(showCompletedSelector);
-
-    const showCompletedLabel = document.createElement("lable");
-    showCompletedLabel.setAttribute("for", "showCompleted");
-    showCompletedLabel.textContent = "Show completed tasks";
-    showCompletedSelector.appendChild(showCompletedLabel);
-
-    const showCompleted = document.createElement("input");
-    showCompleted.type = "checkbox";
-    showCompleted.id = "showCompleted";
-    showCompleted.name = "showCompleted";
-    showCompleted.checked = true;
-    showCompleted.classList.add("showCompleted");
-    showCompletedSelector.appendChild(showCompleted);
-
-    const applyFiltersButton = document.createElement("button");
-    applyFiltersButton.classList.add("applyFiltersButton");
-    applyFiltersButton.classList.add("buttonstyle3");
-    applyFiltersButton.innerText = "Apply filters";
-    TaskFilterMenu.appendChild(applyFiltersButton);
+    const priorityLow = document.createElement("div");
+    priorityLow.classList.add("indicators");
+    priorityLegend.appendChild(priorityLow);
+    const priorityIndicatorLow = document.createElement("div");
+    priorityIndicatorLow.classList.add("priorityIndicator");
+    priorityIndicatorLow.classList.add("Low");
+    const text = document.createElement("p");
+    text.textContent = "Low importance";
+    priorityLow.appendChild(priorityIndicatorLow);
+    priorityLow.appendChild(text);
   }
 
   function createTaskDisplay() {
@@ -331,7 +286,12 @@ const DOM = (() => {
     const overlay = document.querySelector("#inputOverlay");
 
     const form = document.createElement("form");
+    form.classList.add("taskForm");
     form.setAttribute("method", "post");
+
+    const legend = document.createElement("legend");
+    legend.textContent = "New Task";
+    form.appendChild(legend);
 
     const taskName = document.createElement("input");
     taskName.setAttribute("type", "text");
@@ -403,6 +363,11 @@ const DOM = (() => {
     overlay.remove();
   }
 
+  function changecurrentView(view) {
+    const currentView = document.querySelector(".currentView");
+    currentView.textContent = view;
+  }
+
   // Function to run on load to draw the UI elements
 
   function createUI() {
@@ -422,6 +387,7 @@ const DOM = (() => {
     overLayDestroyer,
     sidebarProjectList,
     removeTaskCard,
+    changecurrentView,
   };
 })();
 

@@ -7,6 +7,7 @@ const EVENTS = (() => {
     const projectList = document.querySelector(".projectList");
     projectList.addEventListener("click", (event) => {
       DOM.arrayPrinter(storage.filterByProject(event.target.id));
+      DOM.changecurrentView(event.target.textContent);
     });
   }
   function addRemoveListenersToTaskCards() {
@@ -99,6 +100,7 @@ const EVENTS = (() => {
   function showAllTasks() {
     const allTasksButton = document.querySelector("#allTasksButton");
     allTasksButton.addEventListener("click", () => {
+      DOM.changecurrentView("All Tasks");
       DOM.arrayPrinter(storage.taskStorage);
       addAllCardListeners();
     });
@@ -106,6 +108,7 @@ const EVENTS = (() => {
   function showDueTodayTasks() {
     const dueTodayButton = document.querySelector("#dueTodayButton");
     dueTodayButton.addEventListener("click", () => {
+      DOM.changecurrentView("Today");
       DOM.arrayPrinter(storage.filterbyDueToday());
       addAllCardListeners();
     });
@@ -113,6 +116,7 @@ const EVENTS = (() => {
   function showUpcomingTasks() {
     const upcomingButton = document.querySelector("#upcomingButton");
     upcomingButton.addEventListener("click", () => {
+      DOM.changecurrentView("This Week");
       DOM.arrayPrinter(storage.filterbyDueThisWeek());
       addAllCardListeners();
     });
@@ -120,6 +124,7 @@ const EVENTS = (() => {
   function showCompletedTasks() {
     const completedButton = document.querySelector("#completedButton");
     completedButton.addEventListener("click", () => {
+      DOM.changecurrentView("Completed");
       DOM.arrayPrinter(storage.filterCompleted());
       addAllCardListeners();
     });

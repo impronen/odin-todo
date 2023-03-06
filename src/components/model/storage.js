@@ -107,7 +107,7 @@ const storage = {
       return storage.taskStorage.sort((a, b) =>
         a.convertPriority() > b.convertPriority() ? -1 : 1
       );
-    }
+    } // Ascending is the default sort
     return storage.taskStorage.sort((a, b) =>
       a.convertPriority() > b.convertPriority() ? 1 : -1
     );
