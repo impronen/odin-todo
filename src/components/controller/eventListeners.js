@@ -83,6 +83,7 @@ const EVENTS = (() => {
       addListenersToProjectList();
       addRemoveListenersToTaskCards();
       addCompletedEventListenersToTaskCards();
+      // eslint-disable-next-line no-use-before-define
       addEditListenersToTaskCards();
     });
   }
