@@ -19,6 +19,7 @@ const EVENTS = (() => {
         localStorage.clear();
         storage.pushToLocal();
         DOM.sidebarProjectList(storage.filterProjectNames());
+        addListenersToProjectList();
         parent.classList.add("removedCard");
         parent.addEventListener("transitionend", () => {
           parent.remove();
@@ -26,10 +27,7 @@ const EVENTS = (() => {
       })
     );
   }
-  function addEditListenersToTaskCards() {
-    const editIcons = document.querySelectorAll(".edit");
-    editIcons.forEach((element) => element.addEventListener("click", () => {}));
-  }
+
   function addCompletedEventListenersToTaskCards() {
     const completeButton = document.querySelectorAll(".taskDoneBtn");
     completeButton.forEach((element) => {
@@ -61,7 +59,46 @@ const EVENTS = (() => {
       DOM.overLayDestroyer();
     });
   }
-  function addToTaskListListener() {
+  function saveModifiedTask() {
+    const saveTask = document.querySelector("#addToTaskList");
+    saveTask.addEventListener("click", () => {
+      const form = document.querySelector("#inputOverlay");
+      const name = form.querySelector('input[name="taskName"]').value;
+      const project = form.querySelector('input[name="projectName"]').value;
+      const priority = form.querySelector('select[name="priority"]').value;
+      const date = form.querySelector('input[id="selectedDate"]').value;
+      const info = form.querySelector('input[name="info"]').value;
+
+      const taskToMod = storage.findByuuid(saveTask.dataset.task);
+      taskToMod.changeName(name);
+      taskToMod.changeProject(project);
+      taskToMod.changePriority(priority);
+      taskToMod.changeDate(new Date(`${date}T00:00`));
+      taskToMod.changeInfo(info);
+
+      storage.pushToLocal();
+      DOM.overLayDestroyer();
+      DOM.arrayPrinter(storage.taskStorage);
+      DOM.sidebarProjectList(storage.filterProjectNames());
+      addListenersToProjectList();
+      addRemoveListenersToTaskCards();
+      addCompletedEventListenersToTaskCards();
+      addEditListenersToTaskCards();
+    });
+  }
+  function addEditListenersToTaskCards() {
+    const editIcons = document.querySelectorAll(".edit");
+    editIcons.forEach((element) =>
+      element.addEventListener("click", () => {
+        const parent = element.closest(".taskCard");
+        const targetTask = storage.findByuuid(parent.dataset.uuid);
+        DOM.overLayRendered(targetTask);
+        closeOverLayLister();
+        saveModifiedTask();
+      })
+    );
+  }
+  function saveNewTask() {
     const addNewTask = document.querySelector("#addToTaskList");
 
     addNewTask.addEventListener("click", () => {
@@ -81,7 +118,6 @@ const EVENTS = (() => {
       );
       storage.taskStorage.push(newTask1);
       storage.pushToLocal();
-      newTask1.isTheDate();
       DOM.overLayDestroyer();
       DOM.arrayPrinter(storage.taskStorage);
       DOM.sidebarProjectList(storage.filterProjectNames());
@@ -96,11 +132,11 @@ const EVENTS = (() => {
     addCompletedEventListenersToTaskCards();
     addEditListenersToTaskCards();
   }
-  function taskAddingOverlayListener() {
+  function taskAddingListener() {
     const addTaskButton = document.querySelector("#addTaskButton");
     addTaskButton.addEventListener("click", () => {
       DOM.overLayRendered();
-      addToTaskListListener();
+      saveNewTask();
       closeOverLayLister();
     });
   }
@@ -137,7 +173,7 @@ const EVENTS = (() => {
     });
   }
   function setDefaultListeners() {
-    taskAddingOverlayListener();
+    taskAddingListener();
     showAllTasks();
     showDueTodayTasks();
     showUpcomingTasks();

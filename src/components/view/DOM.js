@@ -103,7 +103,7 @@ const DOM = (() => {
     sidebar.appendChild(projectListContainer);
   }
 
-  // Sidebar project list - initialised w/ sidebarProjectList() and items are added w/ addSingleProjectToSidebar
+  // Sidebar project list add & remove
 
   function projectListRemover() {
     const projectList = document.querySelector(".projectList");
@@ -128,7 +128,7 @@ const DOM = (() => {
     projectContainer.appendChild(projectList);
   }
 
-  // Creating right side of screen w/ filter menu & container for tasks
+  // Creating right side of screen w/ importance legend & container for tasks
 
   function createDisplay() {
     const main = document.querySelector(".main");
@@ -137,7 +137,7 @@ const DOM = (() => {
     main.appendChild(display);
   }
 
-  function createTaskFilterMenu() {
+  function createImportanceIndicators() {
     const display = document.querySelector(".display");
     const TaskFilterMenu = document.createElement("div");
     TaskFilterMenu.classList.add("TaskFilterMenu");
@@ -187,6 +187,11 @@ const DOM = (() => {
     priorityLow.appendChild(text);
   }
 
+  function changecurrentView(view) {
+    const currentView = document.querySelector(".currentView");
+    currentView.textContent = view;
+  }
+
   function createTaskDisplay() {
     const display = document.querySelector(".display");
     const taskDisplay = document.createElement("div");
@@ -194,7 +199,7 @@ const DOM = (() => {
     display.appendChild(taskDisplay);
   }
 
-  // Task displayer creation (cards)
+  // Task displayer creation & removal (cards)
 
   function arrayPrinter(currentArray) {
     // Use as cleaner & rebuilder of cards visible to user
@@ -280,9 +285,10 @@ const DOM = (() => {
   function removeTaskCard(card) {
     card.remove();
   }
+
   // Form and overlay to add new tasks
 
-  function formCreator() {
+  function formCreator(task) {
     const overlay = document.querySelector("#inputOverlay");
 
     const topRow = document.createElement("div");
@@ -355,26 +361,43 @@ const DOM = (() => {
     addToTaskList.setAttribute("id", "addToTaskList");
     addToTaskList.classList.add("buttonstyle1");
 
+    if (task !== undefined) {
+      // Adds values from object if object is passed to form creator
+      taskName.value = task.getName();
+      projectName.value = task.getProject();
+      priority.value = task.getPriority();
+      dueDate.value = task.getRawDate().toISOString().substring(0, 10);
+      info.value = task.getInfo();
+      addToTaskList.innerHTML = "Save changes";
+      addToTaskList.dataset.task = task.getUuid();
+    }
+
     overlay.appendChild(addToTaskList);
   }
 
-  function overLayRendered() {
+  // Task editing overlay modal
+
+  function taskEditor(task) {
+    const page = document.querySelector(".main");
+    const editorOverlay = document.createElement("div");
+    editorOverlay.setAttribute("id", "editorOverlay");
+    editorOverlay.className = "inputOverlay";
+    page.appendChild(editorOverlay);
+    formCreator(task);
+  }
+
+  function overLayRendered(task) {
     const page = document.querySelector(".main");
     const inputOverlay = document.createElement("div");
     inputOverlay.setAttribute("id", "inputOverlay");
     inputOverlay.className = "inputOverlay";
     page.appendChild(inputOverlay);
-    formCreator();
+    formCreator(task);
   }
 
   function overLayDestroyer() {
     const overlay = document.querySelector(".inputOverlay");
     overlay.remove();
-  }
-
-  function changecurrentView(view) {
-    const currentView = document.querySelector(".currentView");
-    currentView.textContent = view;
   }
 
   // Function to run on load to draw the UI elements
@@ -384,7 +407,7 @@ const DOM = (() => {
     createMain();
     createSidebar();
     createDisplay();
-    createTaskFilterMenu();
+    createImportanceIndicators();
     createTaskDisplay();
   }
 
@@ -397,6 +420,7 @@ const DOM = (() => {
     sidebarProjectList,
     removeTaskCard,
     changecurrentView,
+    taskEditor,
   };
 })();
 

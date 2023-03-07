@@ -1,3 +1,15 @@
+7/3/2023
+
+Abandoned ambitions with filters - they proved to be more work than anticipated
+and project was getting bloated. The UI element meant for them now contains 
+priority indicators. 
+
+Have now built DOM element for task editing overlay. I will reuse the form built
+for new tasks with minor modifications. The form function will be refactored to take in
+a task object and when a task is passed in a simple if clause will run a 
+seperate function, that populates the fields with data from the task object &
+change "add task" button to modify task. 
+
 6/3/2023
 
 Next to implement:

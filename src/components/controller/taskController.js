@@ -51,6 +51,10 @@ class Task extends Project {
     return exportDate;
   }
 
+  getRawDate() {
+    return this.dueDate;
+  }
+
   getInfo() {
     return this.info;
   }

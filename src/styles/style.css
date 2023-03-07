@@ -221,6 +221,16 @@ legend {
   background-color: var(--line-color);
 }
 
+.delete-project {
+  scale: (0.5);
+  transform: scale(0.9);
+  transition: transform 0.1s ease-in-out;
+}
+
+.delete-project:hover {
+  transform: scale(1.05);
+}
+
 .priorityFilterSelector,
 .indicators {
   display: flex;
