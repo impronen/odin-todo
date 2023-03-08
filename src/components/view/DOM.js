@@ -123,6 +123,7 @@ const DOM = (() => {
       listItem.setAttribute("id", `${project}`);
       listItem.dataset.project = `${project}`;
       listItem.innerHTML = `${project}`;
+      listItem.classList.add("projectListItem");
       projectList.appendChild(listItem);
     });
     projectContainer.appendChild(projectList);
@@ -227,7 +228,13 @@ const DOM = (() => {
 
     const dueDate = document.createElement("div");
     dueDate.classList.add("dueDate");
-    dueDate.innerHTML = ` ${task.getDate()}`;
+    const taskDate = task.getDate();
+    if (taskDate === "aN/aN") {
+      dueDate.innerHTML = "No deadline";
+    } else {
+      dueDate.innerHTML = ` ${taskDate}`;
+    }
+
     cardCol1.appendChild(dueDate);
 
     const priorityIndicator = document.createElement("div");
@@ -253,11 +260,15 @@ const DOM = (() => {
 
     const daysLeft = document.createElement("div");
     daysLeft.classList.add("daysLeft");
-    if (task.getCompletion() === true) {
+    const completion = task.getCompletion();
+    const days = task.howManyDays();
+    if (completion === true) {
       daysLeft.innerHTML = "Completed";
       daysLeft.classList.add(".completed");
+    } else if (days === "NaN days left") {
+      daysLeft.innerHTML = " ";
     } else {
-      daysLeft.innerHTML = task.howManyDays();
+      daysLeft.innerHTML = days;
     }
     cardCol2.appendChild(daysLeft);
 
@@ -314,11 +325,13 @@ const DOM = (() => {
     taskName.setAttribute("type", "text");
     taskName.setAttribute("name", "taskName");
     taskName.setAttribute("placeholder", "Task");
+    taskName.setAttribute("maxlength", "20");
 
     const projectName = document.createElement("input");
     projectName.setAttribute("type", "text");
     projectName.setAttribute("name", "projectName");
     projectName.setAttribute("placeholder", "Project");
+    projectName.setAttribute("maxlength", "20");
 
     const priority = document.createElement("select");
     priority.setAttribute("name", "priority");
@@ -379,24 +392,28 @@ const DOM = (() => {
 
   function taskEditor(task) {
     const page = document.querySelector(".main");
-    const editorOverlay = document.createElement("div");
+    const editorOverlay = document.createElement("dialog");
     editorOverlay.setAttribute("id", "editorOverlay");
     editorOverlay.className = "inputOverlay";
     page.appendChild(editorOverlay);
     formCreator(task);
+    editorOverlay.showModal();
   }
 
   function overLayRendered(task) {
     const page = document.querySelector(".main");
-    const inputOverlay = document.createElement("div");
+    const inputOverlay = document.createElement("dialog");
     inputOverlay.setAttribute("id", "inputOverlay");
     inputOverlay.className = "inputOverlay";
     page.appendChild(inputOverlay);
+    console.log("yeah");
     formCreator(task);
+    inputOverlay.showModal();
   }
 
   function overLayDestroyer() {
     const overlay = document.querySelector(".inputOverlay");
+    overlay.close();
     overlay.remove();
   }
 

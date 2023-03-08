@@ -4,10 +4,12 @@ import DOM from "../view/DOM";
 
 const EVENTS = (() => {
   function addListenersToProjectList() {
-    const projectList = document.querySelector(".projectList");
-    projectList.addEventListener("click", (event) => {
-      DOM.arrayPrinter(storage.filterByProject(event.target.id));
-      DOM.changecurrentView(event.target.textContent);
+    const projectList = document.querySelectorAll(".projectListItem");
+    projectList.forEach((element) => {
+      element.addEventListener("click", (event) => {
+        DOM.arrayPrinter(storage.filterByProject(event.target.id));
+        DOM.changecurrentView(event.target.textContent);
+      });
     });
   }
   function addRemoveListenersToTaskCards() {
@@ -85,6 +87,7 @@ const EVENTS = (() => {
       addCompletedEventListenersToTaskCards();
       // eslint-disable-next-line no-use-before-define
       addEditListenersToTaskCards();
+      // eslint-disable-next-line no-use-before-define
     });
   }
   function addEditListenersToTaskCards() {
@@ -99,7 +102,7 @@ const EVENTS = (() => {
       })
     );
   }
-  function saveNewTask() {
+  function saveNewTaskListener() {
     const addNewTask = document.querySelector("#addToTaskList");
 
     addNewTask.addEventListener("click", () => {
@@ -126,6 +129,7 @@ const EVENTS = (() => {
       addRemoveListenersToTaskCards();
       addCompletedEventListenersToTaskCards();
       addEditListenersToTaskCards();
+      // eslint-disable-next-line no-use-before-define
     });
   }
   function addAllCardListeners() {
@@ -137,7 +141,7 @@ const EVENTS = (() => {
     const addTaskButton = document.querySelector("#addTaskButton");
     addTaskButton.addEventListener("click", () => {
       DOM.overLayRendered();
-      saveNewTask();
+      saveNewTaskListener();
       closeOverLayLister();
     });
   }

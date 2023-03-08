@@ -265,6 +265,8 @@ legend {
   font-size: large;
   margin-left: 45%;
   margin-top: 10%;
+  overflow: hidden;
+  border-width: 0px;
 }
 
 .topRow {

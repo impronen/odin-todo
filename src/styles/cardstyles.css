@@ -23,6 +23,7 @@
 .taskCard {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   color: var(--text-dark);
   width: 100%;
   max-width: 250px;
@@ -61,6 +62,13 @@
   display: flex;
   align-items: start;
   font-size: 25px;
+  word-break: break-word;
+  max-width: 50%;
+}
+
+.projectName {
+  word-break: break-word;
+  max-width: 50%;
 }
 
 .dueDate {
