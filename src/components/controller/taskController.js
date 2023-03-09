@@ -52,7 +52,9 @@ class Task extends Project {
   }
 
   getRawDate() {
-    return this.dueDate;
+    const fullDate = this.dueDate.toISOString().substring(0, 10);
+    console.log(fullDate);
+    return fullDate;
   }
 
   getInfo() {

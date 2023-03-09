@@ -9,7 +9,33 @@ const EVENTS = (() => {
       element.addEventListener("click", (event) => {
         DOM.arrayPrinter(storage.filterByProject(event.target.id));
         DOM.changecurrentView(event.target.textContent);
+        DOM.removeDeleteProjectButton();
+        DOM.createDeleteProjectButton(projectList);
+        // eslint-disable-next-line no-use-before-define
+        addListenerToDeleteProjectButton(event.target.textContent);
+        // eslint-disable-next-line no-use-before-define
+        addRemoveListenersToTaskCards();
       });
+    });
+  }
+  function addListenerToDeleteProjectButton(target) {
+    const deleteProjectButton = document.querySelector(".deleteProjectButton");
+    deleteProjectButton.addEventListener("click", () => {
+      const projectTasks = storage.filterByProject(target);
+      projectTasks.forEach((element) => {
+        storage.removeTask(element.getUuid());
+      });
+      localStorage.clear();
+      storage.pushToLocal();
+      // eslint-disable-next-line no-use-before-define
+      showAllTasks();
+      DOM.sidebarProjectList(storage.filterProjectNames());
+      addListenersToProjectList();
+      DOM.removeDeleteProjectButton();
+      DOM.changecurrentView("All Tasks");
+      DOM.arrayPrinter(storage.taskStorage);
+      // eslint-disable-next-line no-use-before-define
+      addAllCardListeners();
     });
   }
   function addRemoveListenersToTaskCards() {
@@ -29,7 +55,6 @@ const EVENTS = (() => {
       })
     );
   }
-
   function addCompletedEventListenersToTaskCards() {
     const completeButton = document.querySelectorAll(".taskDoneBtn");
     completeButton.forEach((element) => {
@@ -75,7 +100,7 @@ const EVENTS = (() => {
       taskToMod.changeName(name);
       taskToMod.changeProject(project);
       taskToMod.changePriority(priority);
-      taskToMod.changeDate(new Date(`${date}T00:00`));
+      taskToMod.changeDate(new Date(`${date}T12:00`));
       taskToMod.changeInfo(info);
 
       storage.pushToLocal();
@@ -112,12 +137,11 @@ const EVENTS = (() => {
       const priority = form.querySelector('select[name="priority"]').value;
       const date = form.querySelector('input[id="selectedDate"]').value;
       const info = form.querySelector('input[name="info"]').value;
-
       const newTask1 = new Task(
         name,
         project,
         priority,
-        new Date(`${date}T00:00`),
+        new Date(`${date}T12:00`),
         info
       );
       storage.taskStorage.push(newTask1);
@@ -148,6 +172,7 @@ const EVENTS = (() => {
   function showAllTasks() {
     const allTasksButton = document.querySelector("#allTasksButton");
     allTasksButton.addEventListener("click", () => {
+      DOM.removeDeleteProjectButton();
       DOM.changecurrentView("All Tasks");
       DOM.arrayPrinter(storage.taskStorage);
       addAllCardListeners();
@@ -156,6 +181,7 @@ const EVENTS = (() => {
   function showDueTodayTasks() {
     const dueTodayButton = document.querySelector("#dueTodayButton");
     dueTodayButton.addEventListener("click", () => {
+      DOM.removeDeleteProjectButton();
       DOM.changecurrentView("Today");
       DOM.arrayPrinter(storage.filterbyDueToday());
       addAllCardListeners();
@@ -164,6 +190,7 @@ const EVENTS = (() => {
   function showUpcomingTasks() {
     const upcomingButton = document.querySelector("#upcomingButton");
     upcomingButton.addEventListener("click", () => {
+      DOM.removeDeleteProjectButton();
       DOM.changecurrentView("This Week");
       DOM.arrayPrinter(storage.filterbyDueThisWeek());
       addAllCardListeners();
@@ -172,6 +199,7 @@ const EVENTS = (() => {
   function showCompletedTasks() {
     const completedButton = document.querySelector("#completedButton");
     completedButton.addEventListener("click", () => {
+      DOM.removeDeleteProjectButton();
       DOM.changecurrentView("Completed");
       DOM.arrayPrinter(storage.filterCompleted());
       addAllCardListeners();

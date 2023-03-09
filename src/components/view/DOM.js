@@ -188,6 +188,26 @@ const DOM = (() => {
     priorityLow.appendChild(text);
   }
 
+  function createDeleteProjectButton(project) {
+    const TaskFilterMenu = document.querySelector(".TaskFilterMenu");
+    /*     const priorityFilterSelector = document.querySelector(
+      ".priorityFilterSelector"
+    ); */
+
+    const deleteProjectButton = document.createElement("button");
+    deleteProjectButton.classList.add("buttonstyle3");
+    deleteProjectButton.classList.add("deleteProjectButton");
+    deleteProjectButton.setAttribute("id", `${project}`);
+    deleteProjectButton.innerText = "Delete project";
+
+    TaskFilterMenu.appendChild(deleteProjectButton);
+  }
+  function removeDeleteProjectButton() {
+    const deleteProjectButton = document.querySelector(".deleteProjectButton");
+    if (deleteProjectButton != null) {
+      deleteProjectButton.remove();
+    }
+  }
   function changecurrentView(view) {
     const currentView = document.querySelector(".currentView");
     currentView.textContent = view;
@@ -229,11 +249,7 @@ const DOM = (() => {
     const dueDate = document.createElement("div");
     dueDate.classList.add("dueDate");
     const taskDate = task.getDate();
-    if (taskDate === "aN/aN") {
-      dueDate.innerHTML = "No deadline";
-    } else {
-      dueDate.innerHTML = ` ${taskDate}`;
-    }
+    dueDate.innerHTML = ` ${taskDate}`;
 
     cardCol1.appendChild(dueDate);
 
@@ -326,12 +342,14 @@ const DOM = (() => {
     taskName.setAttribute("name", "taskName");
     taskName.setAttribute("placeholder", "Task");
     taskName.setAttribute("maxlength", "20");
+    taskName.setAttribute("required", "");
 
     const projectName = document.createElement("input");
     projectName.setAttribute("type", "text");
     projectName.setAttribute("name", "projectName");
     projectName.setAttribute("placeholder", "Project");
     projectName.setAttribute("maxlength", "20");
+    projectName.setAttribute("required", "");
 
     const priority = document.createElement("select");
     priority.setAttribute("name", "priority");
@@ -355,37 +373,41 @@ const DOM = (() => {
     const dueDate = document.createElement("input");
     dueDate.setAttribute("type", "date");
     dueDate.setAttribute("id", "selectedDate");
+    const defaultDate = new Date().toISOString().substring(0, 10);
+    dueDate.setAttribute("value", defaultDate);
+    dueDate.setAttribute("required", "");
 
     const info = document.createElement("input");
     info.setAttribute("type", "textarea");
     info.setAttribute("name", "info");
     info.setAttribute("placeholder", "Notes");
+    info.setAttribute("rows", 5);
+    info.setAttribute("cols", 33);
+
+    const addToTaskList = document.createElement("button");
+    addToTaskList.innerHTML = "Add Task";
+    addToTaskList.setAttribute("id", "addToTaskList");
+    addToTaskList.setAttribute("type", "button");
+    addToTaskList.classList.add("buttonstyle1");
 
     form.appendChild(taskName);
     form.appendChild(projectName);
     form.appendChild(priority);
     form.appendChild(dueDate);
     form.appendChild(info);
-
+    form.appendChild(addToTaskList);
     overlay.appendChild(form);
-
-    const addToTaskList = document.createElement("button");
-    addToTaskList.innerHTML = "Add Task";
-    addToTaskList.setAttribute("id", "addToTaskList");
-    addToTaskList.classList.add("buttonstyle1");
 
     if (task !== undefined) {
       // Adds values from object if object is passed to form creator
       taskName.value = task.getName();
       projectName.value = task.getProject();
       priority.value = task.getPriority();
-      dueDate.value = task.getRawDate().toISOString().substring(0, 10);
+      dueDate.value = task.getRawDate();
       info.value = task.getInfo();
       addToTaskList.innerHTML = "Save changes";
       addToTaskList.dataset.task = task.getUuid();
     }
-
-    overlay.appendChild(addToTaskList);
   }
 
   // Task editing overlay modal
@@ -406,7 +428,6 @@ const DOM = (() => {
     inputOverlay.setAttribute("id", "inputOverlay");
     inputOverlay.className = "inputOverlay";
     page.appendChild(inputOverlay);
-    console.log("yeah");
     formCreator(task);
     inputOverlay.showModal();
   }
@@ -438,6 +459,8 @@ const DOM = (() => {
     removeTaskCard,
     changecurrentView,
     taskEditor,
+    createDeleteProjectButton,
+    removeDeleteProjectButton,
   };
 })();
 

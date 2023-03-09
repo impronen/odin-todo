@@ -334,7 +334,6 @@ legend {
   margin: 5px;
   font-size: 14px;
   overflow: hidden;
-  max-height: 100px;
-  resize: none;
+  /*   max-height: 100px; */
   word-break: break-all;
 }
