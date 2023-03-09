@@ -33,7 +33,7 @@ User feature:
 
 - the app is not mobile responsive
 - creation of DOM elements is inefficient and the code is hard to read, same holds for event listeners, where function names arent always properly indicative of purpose
-- user currently has no way of deleting a project other than deleting tasks one at a time -> feature to fix this is in planning
+- ~~user currently has no way of deleting a project other than deleting tasks one at a time -> feature to fix this is in planning~~ project deletion has been implemented
 
 # THOUGHTS
 
