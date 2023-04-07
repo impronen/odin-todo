@@ -14,7 +14,7 @@ const EVENTS = (() => {
         // eslint-disable-next-line no-use-before-define
         addListenerToDeleteProjectButton(event.target.textContent);
         // eslint-disable-next-line no-use-before-define
-        addRemoveListenersToTaskCards();
+        addAllCardListeners();
       });
     });
   }
