@@ -76,6 +76,18 @@ legend {
   flex-direction: row;
   align-items: center;
   align-content: space-around;
+  animation-duration: 0.5s;
+  animation-name: growToFill;
+}
+
+@keyframes growToFill {
+  from {
+    transform: scale(0.1);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
 
 .buttonContainer {
